@@ -197,5 +197,3 @@ public abstract class WizardImpl {
     return myDialog;
   }
 }
-
-//can commit
