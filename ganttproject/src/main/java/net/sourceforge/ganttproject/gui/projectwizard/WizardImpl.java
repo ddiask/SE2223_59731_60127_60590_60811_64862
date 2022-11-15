@@ -62,6 +62,9 @@ public abstract class WizardImpl {
 
   private final AbstractAction myCancelAction;
 
+  //Teste
+  private final AbstractAction mySendEmailAction;
+
   private final UIFacade myUIFacade;
 
   private final String myTitle;
@@ -98,6 +101,11 @@ public abstract class WizardImpl {
         onCancelPressed();
       }
     };
+
+    mySendEmailAction = new MailAction() {
+
+      public  void actionPerformed(ActionEvent e) {onSendEmailPressed();}
+    }
   }
 
   public void nextPage() {
@@ -182,6 +190,10 @@ public abstract class WizardImpl {
   }
 
   private void onCancelPressed() {
+    getCurrentPage().setActive(false);
+  }
+
+  private void onSendEmailPressed() {
     getCurrentPage().setActive(false);
   }
 
