@@ -25,3 +25,5 @@ public interface ActionDelegate {
   /** Add a listener which is interested in state changes of the Action */
   void addStateChangedListener(ActionStateChangedListener l);
 }
+
+//check if can commit
