@@ -32,7 +32,7 @@ public class CancelAction extends GPAction {
   public static final CancelAction CLOSE = new CancelAction("close");
 
   public CancelAction() {
-    this("cancel");
+    this("close");
   }
 
   /** For concealed CancelActions (with a different text) */

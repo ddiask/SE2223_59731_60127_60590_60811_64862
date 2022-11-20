@@ -35,6 +35,7 @@ import com.google.common.collect.Maps;
 import net.sourceforge.ganttproject.action.CancelAction;
 import net.sourceforge.ganttproject.action.GPAction;
 import net.sourceforge.ganttproject.action.OkAction;
+import net.sourceforge.ganttproject.action.EmailAction;
 import net.sourceforge.ganttproject.gui.UIFacade;
 import net.sourceforge.ganttproject.gui.UIFacade.Centering;
 import net.sourceforge.ganttproject.gui.UIFacade.Dialog;
@@ -61,6 +62,8 @@ public abstract class WizardImpl {
   private final AbstractAction myOkAction;
 
   private final AbstractAction myCancelAction;
+
+  private final AbstractAction myEmailAction;
 
   private final UIFacade myUIFacade;
 
@@ -92,12 +95,23 @@ public abstract class WizardImpl {
         onOkPressed();
       }
     };
+
+    myEmailAction = new EmailAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        onEmailPressed();
+
+      }
+    };
+
     myCancelAction = new CancelAction() {
       @Override
       public void actionPerformed(ActionEvent e) {
         onCancelPressed();
       }
     };
+
+
   }
 
   public void nextPage() {
@@ -129,9 +143,9 @@ public abstract class WizardImpl {
     }
     myCardLayout.first(myPagesContainer);
     getCurrentPage().setActive(true);
-    myPagesContainer.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    myPagesContainer.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
     adjustButtonState();
-    myDialog = myUIFacade.createDialog(myPagesContainer, new Action[] { myBackAction, myNextAction, myOkAction,
+    myDialog = myUIFacade.createDialog(myPagesContainer, new Action[] { myBackAction, myNextAction, myOkAction, myEmailAction,
         myCancelAction }, myTitle);
     myDialog.center(Centering.SCREEN);
     myDialog.show();
@@ -144,7 +158,7 @@ public abstract class WizardImpl {
         + " " + language.getText("of") + " " + (myPages.size()) + ")", null);
     pagePanel.add(titlePanel, BorderLayout.NORTH);
     JComponent component = (JComponent) page.getComponent();
-    component.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+    component.setBorder(BorderFactory.createEmptyBorder(6, 0, 0, 0));
     pagePanel.add(component, BorderLayout.CENTER);
 
     myPagesContainer.add(pagePanel, page.getTitle());
@@ -163,11 +177,13 @@ public abstract class WizardImpl {
     myBackAction.setEnabled(myCurrentPage > 0);
     myNextAction.setEnabled(myCurrentPage < myPages.size() - 1);
     myOkAction.setEnabled(canFinish());
+    myEmailAction.setEnabled(canFinish());
   }
 
   protected boolean canFinish() {
     return true;
   }
+
 
   protected void addPage(WizardPage page) {
     myPages.add(page);
@@ -175,6 +191,10 @@ public abstract class WizardImpl {
 
   protected void removePage(WizardPage page) {
     myPages.remove(page);
+  }
+
+  protected void onEmailPressed() {
+    getCurrentPage().setActive(false);
   }
 
   protected void onOkPressed() {

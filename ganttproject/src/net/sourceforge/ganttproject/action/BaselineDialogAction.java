@@ -32,6 +32,7 @@ import net.sourceforge.ganttproject.IGanttProject;
 import net.sourceforge.ganttproject.action.CancelAction;
 import net.sourceforge.ganttproject.action.GPAction;
 import net.sourceforge.ganttproject.action.OkAction;
+import net.sourceforge.ganttproject.action.EmailAction;
 import net.sourceforge.ganttproject.gui.AbstractTableAndActionsComponent;
 import net.sourceforge.ganttproject.gui.EditableList;
 import net.sourceforge.ganttproject.gui.UIFacade;
@@ -125,6 +126,37 @@ public class BaselineDialogAction extends GPAction {
       }
     });
 
+    Action action = new EmailAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        list.stopEditing();
+        myProject.getBaselines().clear();
+        myProject.getBaselines().addAll(myBaselines);
+        for (GanttPreviousState trashBaseline : myTrash) {
+          trashBaseline.remove();
+        }
+        myProject.setModified();
+      }
+    };
+
+    Action action1 = new OkAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        list.stopEditing();
+        myProject.getBaselines().clear();
+        myProject.getBaselines().addAll(myBaselines);
+        for (GanttPreviousState trashBaseline : myTrash) {
+          trashBaseline.remove();
+        }
+        myProject.setModified();
+      }
+    };
+
+    Action[] actions = new Action[] { action, action1, CancelAction.EMPTY };
+
+
+
+  /*
     Action[] actions = new Action[] { new OkAction() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -137,6 +169,8 @@ public class BaselineDialogAction extends GPAction {
         myProject.setModified();
       }
     }, CancelAction.EMPTY };
+    */
+
 
     OptionsPageBuilder optionsBuilder = new OptionsPageBuilder();
     optionsBuilder.setUiFacade(myUiFacade);

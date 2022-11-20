@@ -95,6 +95,24 @@ public class ExportFileWizardImpl extends WizardImpl {
     });
   }
 
+  @Override
+  protected void onEmailPressed() {
+      super.onEmailPressed();
+    SwingUtilities.invokeLater(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          ExportFinalizationJob finalizationJob = new ExportFinalizationJobImpl();
+          if ("file".equals(myState.getUrl().getProtocol())) {
+            myState.getExporter().run(new File(myState.getUrl().toURI()), finalizationJob);
+          }
+        } catch (Exception e) {
+          GPLogger.log(e);
+        }
+      }
+    });
+  }
+
   private class ExportFinalizationJobImpl implements ExportFinalizationJob {
     @Override
     public void run(File[] exportedFiles) {
