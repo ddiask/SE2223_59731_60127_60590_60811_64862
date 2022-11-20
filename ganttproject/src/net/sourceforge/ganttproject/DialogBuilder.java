@@ -46,6 +46,7 @@ import net.java.balloontip.BalloonTip;
 import net.java.balloontip.styles.EdgedBalloonStyle;
 import net.sourceforge.ganttproject.action.CancelAction;
 import net.sourceforge.ganttproject.action.OkAction;
+import net.sourceforge.ganttproject.action.EmailAction;
 import net.sourceforge.ganttproject.gui.DialogAligner;
 import net.sourceforge.ganttproject.gui.NotificationComponent.AnimationView;
 import net.sourceforge.ganttproject.gui.NotificationManager;
@@ -104,7 +105,7 @@ class DialogBuilder {
     public void setComponent(final JComponent component, JComponent owner, final Runnable onHide) {
       myNotificationOwner.setVisible(true);
       myBalloon = new BalloonTip(myNotificationOwner, component, new EdgedBalloonStyle(Color.WHITE, Color.BLACK),
-          BalloonTip.Orientation.LEFT_ABOVE, BalloonTip.AttachLocation.ALIGNED, 30, 10, false);
+              BalloonTip.Orientation.LEFT_ABOVE, BalloonTip.AttachLocation.ALIGNED, 30, 10, false);
       myBalloon.setVisible(false);
       myOnHide = onHide;
     }
@@ -245,6 +246,64 @@ class DialogBuilder {
         }
 
       }
+
+      if (nextAction instanceof EmailAction) {
+        final JButton _btn = new JButton();
+        final AbstractAction _delegate = (AbstractAction) nextAction;
+        EmailAction proxy = new EmailAction() {
+          // These two steps handel the case when focus is somewhere in text input
+          // and user hits Ctrl+Enter
+          // First we want to move focus to OK button to allow focus listeners, if any,
+          // to catch focusLost event
+          // Second, we want it to happen before original EmailAction runs
+          // So we wrap original EmailAction into proxy which moves focus and schedules "later" command
+          // which call the original action. Between them EDT sends out focusLost events.
+          final Runnable myStep2 = new Runnable() {
+            @Override
+            public void run() {
+              result.hide();
+              commiter.commit();
+              nextAction.actionPerformed(null);
+              _delegate.removePropertyChangeListener(myDelegateListener);
+            }
+          };
+          final Runnable myStep1 = new Runnable() {
+            @Override
+            public void run() {
+              _btn.requestFocus();
+              SwingUtilities.invokeLater(myStep2);
+            }
+          };
+          @Override
+          public void actionPerformed(final ActionEvent e) {
+            SwingUtilities.invokeLater(myStep1);
+          }
+          private void copyValues() {
+            for (Object key : _delegate.getKeys()) {
+              putValue(key.toString(), _delegate.getValue(key.toString()));
+            }
+            setEnabled(_delegate.isEnabled());
+          }
+          private PropertyChangeListener myDelegateListener = new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+              copyValues();
+            }
+          };
+          {
+            _delegate.addPropertyChangeListener(myDelegateListener);
+            copyValues();
+          }
+        };
+        _btn.setAction(proxy);
+        nextButton = _btn;
+
+        if (((EmailAction)nextAction).isDefault()) {
+          dlg.getRootPane().setDefaultButton(nextButton);
+        }
+
+      }
+
       if (nextAction instanceof CancelAction) {
         cancelAction = nextAction;
         nextButton = new JButton(nextAction);
@@ -256,7 +315,7 @@ class DialogBuilder {
           }
         });
         dlg.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
-            KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), nextAction.getValue(Action.NAME));
+                KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), nextAction.getValue(Action.NAME));
         dlg.getRootPane().getActionMap().put(nextAction.getValue(Action.NAME), new AbstractAction() {
           @Override
           public void actionPerformed(ActionEvent e) {
