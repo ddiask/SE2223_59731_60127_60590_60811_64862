@@ -36,6 +36,8 @@ import net.sourceforge.ganttproject.IGanttProject;
 import net.sourceforge.ganttproject.gui.UIFacade;
 import net.sourceforge.ganttproject.gui.projectwizard.WizardImpl;
 import net.sourceforge.ganttproject.plugins.PluginManager;
+import net.sourceforge.ganttproject.util.BrowserControl;
+import net.sourceforge.ganttproject.export.mail_api;
 
 /**
  * @author bard
@@ -106,6 +108,9 @@ public class ExportFileWizardImpl extends WizardImpl {
           if ("file".equals(myState.getUrl().getProtocol())) {
             myState.getExporter().run(new File(myState.getUrl().toURI()), finalizationJob);
           }
+          //BrowserControl.displayURL("mailto:"+"teste@gmailcom"+"?"+"attach=file:///C:/Users/Afonso/Desktop/ESTESTES/testeemail123.pdf");
+         // mail_api mail = new mail_api();
+         // mail.sendmail("diogo.chcd@gmail.com", "teste", "teste55");
         } catch (Exception e) {
           GPLogger.log(e);
         }
