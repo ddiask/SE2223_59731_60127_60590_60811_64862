@@ -62,6 +62,8 @@ public interface TreeUiFacade<T> {
 
   GPAction getDeleteAction();
 
+  GPAction getTrashAction();
+
   void startDefaultEditing(T modelElement);
   void stopEditing();
   AbstractAction[] getTreeActions();

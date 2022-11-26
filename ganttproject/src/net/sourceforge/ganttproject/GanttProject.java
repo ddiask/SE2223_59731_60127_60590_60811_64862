@@ -330,7 +330,7 @@ public class GanttProject extends GanttProjectBase implements ResourceView, Gant
       mTask.add(taskTree.getNewAction());
       mTask.add(taskTree.getPropertiesAction());
       mTask.add(taskTree.getDeleteAction());
-      mTask.add(taskTree.getDeleteAction());
+      mTask.add(taskTree.getTrashAction());
       getResourcePanel().setTaskPropertiesAction(taskTree.getPropertiesAction());
       bar.add(mTask);
     }
