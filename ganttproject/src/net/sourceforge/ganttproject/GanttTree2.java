@@ -158,9 +158,10 @@ public class GanttTree2 extends TreeTableContainer<Task, GanttTreeTable, GanttTr
     // Create Actions
     GPAction propertiesAction = new TaskPropertiesAction(project.getProject(), selectionManager, uiFacade);
     GPAction deleteAction = new TaskDeleteAction(taskManager, selectionManager, uiFacade, this);
+    GPAction trashAction = new TaskTrashAction(taskManager, selectionManager, uiFacade, this);
     GPAction newAction = new TaskNewAction(project.getProject(), uiFacade);
 
-    setArtefactActions(newAction, propertiesAction, deleteAction);
+    setArtefactActions(newAction, propertiesAction, deleteAction, trashAction);
     myLinkTasksAction = new TaskLinkAction(taskManager, selectionManager, uiFacade);
     myUnlinkTasksAction = new TaskUnlinkAction(taskManager, selectionManager, uiFacade);
     myIndentAction = new TaskIndentAction(taskManager, selectionManager, uiFacade, this);
@@ -168,7 +169,8 @@ public class GanttTree2 extends TreeTableContainer<Task, GanttTreeTable, GanttTr
     myMoveUpAction = new TaskMoveUpAction(taskManager, selectionManager, uiFacade, this);
     myMoveDownAction = new TaskMoveDownAction(taskManager, selectionManager, uiFacade, this);
     getTreeTable().setupActionMaps(myMoveUpAction, myMoveDownAction, myIndentAction, myUnindentAction, newAction,
-        myProject.getCutAction(), myProject.getCopyAction(), myProject.getPasteAction(), propertiesAction, deleteAction);
+        myProject.getCutAction(), myProject.getCopyAction(), myProject.getPasteAction(), propertiesAction, deleteAction,
+            trashAction);
   }
 
   @Override
@@ -295,6 +297,7 @@ public class GanttTree2 extends TreeTableContainer<Task, GanttTreeTable, GanttTr
       actions.add(myProject.getCopyAction());
       actions.add(myProject.getPasteAction());
       actions.add(getDeleteAction());
+      actions.add(getTrashAction());
       actions.add(null);
       actions.add(getTreeTable().getManageColumnsAction());
     }

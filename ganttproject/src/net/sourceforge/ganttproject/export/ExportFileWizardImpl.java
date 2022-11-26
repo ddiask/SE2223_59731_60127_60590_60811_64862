@@ -109,10 +109,9 @@ public class ExportFileWizardImpl extends WizardImpl {
           if ("file".equals(myState.getUrl().getProtocol())) {
             myState.getExporter().run(new File(myState.getUrl().toURI()), finalizationJob);
           }
-      //    BrowserControl.displayURL("mailto:"+"teste@gmailcom"+"?"+"attach=file:///C:/Users/Afonso/Desktop/ESTESTES/testeemail123.pdf");
-          LoginFromDemo login = new LoginFromDemo();
-          login.loginMail();
-          System.out.println("Sou um email");
+          //BrowserControl.displayURL("mailto:"+"teste@gmailcom"+"?"+"attach=file:///C:/Users/Afonso/Desktop/ESTESTES/testeemail123.pdf");
+         // mail_api mail = new mail_api();
+         // mail.sendmail("diogo.chcd@gmail.com", "teste", "teste55");
         } catch (Exception e) {
           GPLogger.log(e);
         }

@@ -36,32 +36,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class TaskDeleteAction extends TaskActionBase {
+public class TaskTrashAction extends TaskActionBase {
 
-  public TaskDeleteAction(TaskManager taskManager, TaskSelectionManager selectionManager, UIFacade uiFacade,
-      GanttTree2 tree) {
-    super("task.delete", taskManager, selectionManager, uiFacade, tree);
+  public TaskTrashAction(TaskManager taskManager, TaskSelectionManager selectionManager, UIFacade uiFacade,
+                         GanttTree2 tree) {
+    super("debug", taskManager, selectionManager, uiFacade, tree);
   }
 
-  private TaskDeleteAction(TaskManager taskManager, TaskSelectionManager selectionManager, UIFacade uiFacade,
-      GanttTree2 tree, IconSize size) {
-    super("task.delete", taskManager, selectionManager, uiFacade, tree, size);
+  private TaskTrashAction(TaskManager taskManager, TaskSelectionManager selectionManager, UIFacade uiFacade,
+                          GanttTree2 tree, IconSize size) {
+    super("debug", taskManager, selectionManager, uiFacade, tree, size);
   }
 
   @Override
   public GPAction withIcon(IconSize size) {
-    return new TaskDeleteAction(getTaskManager(), getSelectionManager(), getUIFacade(), getTree(), size);
+    return new TaskTrashAction(getTaskManager(), getSelectionManager(), getUIFacade(), getTree(), size);
   }
 
   @Override
   protected boolean isEnabled(List<Task> selection) {
     return !selection.isEmpty();
-  }
-
-  @Override
-  protected boolean askUserPermission(List<Task> selection) {
-    Choice choice = getUIFacade().showConfirmationDialog(getI18n("msg19"), getI18n("question"));
-    return choice == Choice.YES;
   }
 
   @Override
@@ -97,9 +91,8 @@ public class TaskDeleteAction extends TaskActionBase {
   }
 
   @Override
-  public TaskDeleteAction asToolbarAction() {
-    TaskDeleteAction result = new TaskDeleteAction(getTaskManager(), getSelectionManager(), getUIFacade(), getTree());
-    //result.setFontAwesomeLabel(UIUtil.getFontawesomeLabel(result));
+  public TaskTrashAction asToolbarAction() {
+    TaskTrashAction result = new TaskTrashAction(getTaskManager(), getSelectionManager(), getUIFacade(), getTree());
     return result;
   }
 }
