@@ -40,12 +40,12 @@ public class TaskTrashAction extends TaskActionBase {
 
   public TaskTrashAction(TaskManager taskManager, TaskSelectionManager selectionManager, UIFacade uiFacade,
                          GanttTree2 tree) {
-    super("debug", taskManager, selectionManager, uiFacade, tree);
+    super("task.trash", taskManager, selectionManager, uiFacade, tree);
   }
 
   private TaskTrashAction(TaskManager taskManager, TaskSelectionManager selectionManager, UIFacade uiFacade,
                           GanttTree2 tree, IconSize size) {
-    super("debug", taskManager, selectionManager, uiFacade, tree, size);
+    super("task.trash", taskManager, selectionManager, uiFacade, tree, size);
   }
 
   @Override
@@ -83,7 +83,8 @@ public class TaskTrashAction extends TaskActionBase {
       for (DefaultMutableTreeTableNode node : levelList) {
         if (node != null && node instanceof TaskNode) {
           Task task = (Task) node.getUserObject();
-          getTaskManager().deleteTask(task);
+          //getTaskManager().deleteTask(task);
+          System.out.println(getTaskManager().trash()[0]);
         }
       }
     }

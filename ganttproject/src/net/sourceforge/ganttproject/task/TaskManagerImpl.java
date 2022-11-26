@@ -141,6 +141,7 @@ public class TaskManagerImpl implements TaskManager {
 
   private static class TaskMap {
     private final Map<Integer, Task> myId2task = new HashMap<Integer, Task>();
+    private final Map<Integer, Task> myGarbageId2task = new HashMap<Integer, Task>();
     private TaskDocumentOrderComparator myComparator;
     private boolean isModified = true;
     private Task[] myArray;
@@ -153,6 +154,11 @@ public class TaskManagerImpl implements TaskManager {
 
     void addTask(Task task) {
       myId2task.put(new Integer(task.getTaskID()), task);
+      isModified = true;
+    }
+
+    void addTaskToGarbage(Task task){
+      myGarbageId2task.put(new Integer(task.getTaskID()), task);
       isModified = true;
     }
 
@@ -169,6 +175,15 @@ public class TaskManagerImpl implements TaskManager {
       return myArray;
     }
 
+    public Task[] getGarbageTasks() {
+      if (isModified) {
+        myArray = myGarbageId2task.values().toArray(new Task[myGarbageId2task.size()]);
+        Arrays.sort(myArray, myComparator);
+        isModified = false;
+      }
+      return myArray;
+    }
+
     public void clear() {
       myId2task.clear();
       isModified = true;
@@ -176,6 +191,7 @@ public class TaskManagerImpl implements TaskManager {
 
     public void removeTask(Task task) {
       myId2task.remove(new Integer(task.getTaskID()));
+      addTaskToGarbage(task);
       Task[] nestedTasks = myManager.getTaskHierarchy().getNestedTasks(task);
       for (int i = 0; i < nestedTasks.length; i++) {
         removeTask(nestedTasks[i]);
@@ -327,6 +343,10 @@ public class TaskManagerImpl implements TaskManager {
     myTaskMap.removeTask(tasktoRemove);
     tasktoRemove.delete();
     fireTaskRemoved(container, tasktoRemove);
+  }
+
+  public Task[] trash() {
+    return myTaskMap.getGarbageTasks();
   }
 
   @Override

@@ -222,6 +222,8 @@ public interface TaskManager {
 
   public void deleteTask(Task tasktoRemove);
 
+  public Task[] trash();
+
   CustomPropertyManager getCustomPropertyManager();
 
   StringOption getTaskNamePrefixOption();
