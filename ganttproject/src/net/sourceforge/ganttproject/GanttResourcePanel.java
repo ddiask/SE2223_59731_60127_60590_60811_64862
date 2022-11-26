@@ -94,7 +94,7 @@ public class GanttResourcePanel extends TreeTableContainer<HumanResource, Resour
         myResourceActionSet.getResourcePropertiesAction(),
         deleteAction, trashAction);
     getTreeTable().setupActionMaps(myResourceActionSet.getResourceMoveUpAction(),
-        myResourceActionSet.getResourceMoveDownAction(), null, null, deleteAction,
+        myResourceActionSet.getResourceMoveDownAction(), null, null, deleteAction, trashAction,
         appli.getCutAction(), appli.getCopyAction(), appli.getPasteAction(),
         myResourceActionSet.getResourcePropertiesAction());
     getTreeTable().addActionWithAccelleratorKey(myResourceActionSet.getAssignmentDelete());
