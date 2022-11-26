@@ -37,7 +37,6 @@ import net.sourceforge.ganttproject.gui.UIFacade;
 import net.sourceforge.ganttproject.gui.projectwizard.WizardImpl;
 import net.sourceforge.ganttproject.plugins.PluginManager;
 import net.sourceforge.ganttproject.util.BrowserControl;
-import net.sourceforge.ganttproject.export.mail_api;
 
 /**
  * @author bard

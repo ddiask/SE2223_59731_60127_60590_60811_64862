@@ -330,6 +330,7 @@ public class GanttProject extends GanttProjectBase implements ResourceView, Gant
       mTask.add(taskTree.getNewAction());
       mTask.add(taskTree.getPropertiesAction());
       mTask.add(taskTree.getDeleteAction());
+      mTask.add(taskTree.getDeleteAction());
       getResourcePanel().setTaskPropertiesAction(taskTree.getPropertiesAction());
       bar.add(mTask);
     }
@@ -671,6 +672,7 @@ public class GanttProject extends GanttProjectBase implements ResourceView, Gant
     });
 
     builder.addButton(new TestGanttRolloverButton(deleteAction))
+        .addButton(new TestGanttRolloverButton(deleteAction))
         .addWhitespace()
         .addButton(new TestGanttRolloverButton(propertiesAction))
         .addButton(new TestGanttRolloverButton(getCutAction().asToolbarAction()))
