@@ -341,6 +341,7 @@ public abstract class TreeTableContainer<ModelObject, TreeTableClass extends GPT
     return myDeleteAction;
   }
 
+  @Override
   public GPAction getTrashAction() {
     return myTrashAction;
   }
