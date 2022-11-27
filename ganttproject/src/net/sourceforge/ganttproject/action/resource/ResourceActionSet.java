@@ -42,12 +42,10 @@ public class ResourceActionSet {
 
   private final AssignmentDeleteAction myAssignmentDelete;
 
-  private final TrashAction myTrash;
-
   private AbstractAction[] myActions;
 
   public ResourceActionSet(ResourceContext resourceContext, AssignmentContext assignmentContext,
-      GanttProject projectFrame, UIFacade uiFacade, ResourceTreeTable table) {
+                           GanttProject projectFrame, UIFacade uiFacade, ResourceTreeTable table) {
     HumanResourceManager manager = projectFrame.getHumanResourceManager();
     myResourceNewAction = new ResourceNewAction(manager, projectFrame.getRoleManager(), uiFacade);
     myResourceDeleteAction = new ResourceDeleteAction(manager, resourceContext, projectFrame, uiFacade);
@@ -56,7 +54,6 @@ public class ResourceActionSet {
     myResourceMoveDownAction = new ResourceMoveDownAction(table);
     myResourceSendMailAction = new ResourceSendMailAction(table);
     myAssignmentDelete = new AssignmentDeleteAction(assignmentContext, uiFacade);
-    myTrash = new TrashAction(assignmentContext, uiFacade);
   }
 
   public AbstractAction[] getActions() {
@@ -95,9 +92,5 @@ public class ResourceActionSet {
 
   public AssignmentDeleteAction getAssignmentDelete() {
     return myAssignmentDelete;
-  }
-
-  public TrashAction getTrash() {
-    return myTrash;
   }
 }

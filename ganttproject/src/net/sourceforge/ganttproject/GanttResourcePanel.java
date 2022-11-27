@@ -21,7 +21,6 @@ package net.sourceforge.ganttproject;
 import com.google.common.collect.Lists;
 import net.sourceforge.ganttproject.action.ActiveActionProvider;
 import net.sourceforge.ganttproject.action.ArtefactDeleteAction;
-import net.sourceforge.ganttproject.action.ArtefactTrashAction;
 import net.sourceforge.ganttproject.action.GPAction;
 import net.sourceforge.ganttproject.action.resource.ResourceActionSet;
 import net.sourceforge.ganttproject.chart.Chart;
@@ -51,7 +50,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class GanttResourcePanel extends TreeTableContainer<HumanResource, ResourceTreeTable, ResourceTreeTableModel>
-    implements ResourceView, ResourceContext, AssignmentContext, ResourceTreeUIFacade {
+        implements ResourceView, ResourceContext, AssignmentContext, ResourceTreeUIFacade {
 
   public final GanttProject appli;
 
@@ -67,7 +66,7 @@ public class GanttResourcePanel extends TreeTableContainer<HumanResource, Resour
   private static Pair<ResourceTreeTable, ResourceTreeTableModel> createTreeTable(IGanttProject project,
                                                                                  UIFacade uiFacade) {
     ResourceTreeTableModel model = new ResourceTreeTableModel(project.getHumanResourceManager(),
-        project.getTaskManager(), project.getResourceCustomPropertyManager());
+            project.getTaskManager(), project.getResourceCustomPropertyManager());
     return Pair.create(new ResourceTreeTable(project, model, uiFacade), model);
   }
 
@@ -81,7 +80,6 @@ public class GanttResourcePanel extends TreeTableContainer<HumanResource, Resour
 
     final GPAction resourceDeleteAction = myResourceActionSet.getResourceDeleteAction();
     final GPAction assignmentDeleteAction = myResourceActionSet.getAssignmentDelete();
-    final GPAction assignmentTrashAction = myResourceActionSet.getTrash();
     GPAction deleteAction = new ArtefactDeleteAction(new ActiveActionProvider() {
       @Override
       public AbstractAction getActiveAction() {
@@ -91,19 +89,14 @@ public class GanttResourcePanel extends TreeTableContainer<HumanResource, Resour
         return resourceDeleteAction;
       }
     }, new Action[]{resourceDeleteAction, assignmentDeleteAction});
-    GPAction trashAction = new ArtefactTrashAction(new ActiveActionProvider() {
-      @Override
-      public AbstractAction getActiveAction() {
-          return assignmentTrashAction;
-      }
-    }, new Action[]{assignmentTrashAction});
+    GPAction trashAction = null;
     setArtefactActions(myResourceActionSet.getResourceNewAction(),
-        myResourceActionSet.getResourcePropertiesAction(),
-        deleteAction, trashAction);
+            myResourceActionSet.getResourcePropertiesAction(),
+            deleteAction, trashAction);
     getTreeTable().setupActionMaps(myResourceActionSet.getResourceMoveUpAction(),
-        myResourceActionSet.getResourceMoveDownAction(), null, null, deleteAction, trashAction,
-        appli.getCutAction(), appli.getCopyAction(), appli.getPasteAction(),
-        myResourceActionSet.getResourcePropertiesAction());
+            myResourceActionSet.getResourceMoveDownAction(), null, null, deleteAction, trashAction,
+            appli.getCutAction(), appli.getCopyAction(), appli.getPasteAction(),
+            myResourceActionSet.getResourcePropertiesAction());
     getTreeTable().addActionWithAccelleratorKey(myResourceActionSet.getAssignmentDelete());
     getTreeTable().setRowHeight(20);
 
@@ -185,8 +178,8 @@ public class GanttResourcePanel extends TreeTableContainer<HumanResource, Resour
         getTaskSelectionManager().addTask(assignmentNode.getTask());
         Point popupPoint = getPopupMenuPoint(e);
         getUIFacade().showPopupMenu(this,
-            new Action[]{myTaskPropertiesAction, myResourceActionSet.getAssignmentDelete()}, popupPoint.x,
-            popupPoint.y);
+                new Action[]{myTaskPropertiesAction, myResourceActionSet.getAssignmentDelete()}, popupPoint.x,
+                popupPoint.y);
       } else {
         createPopupMenu(e);
       }
@@ -380,7 +373,7 @@ public class GanttResourcePanel extends TreeTableContainer<HumanResource, Resour
       clearSelection();
     }
     getTree().getTreeSelectionModel().setSelectionPath(
-        TreeUtil.createPath(getResourceTreeTableModel().getNodeForResource(resource)));
+            TreeUtil.createPath(getResourceTreeTableModel().getNodeForResource(resource)));
   }
 
   @Override
@@ -410,7 +403,7 @@ public class GanttResourcePanel extends TreeTableContainer<HumanResource, Resour
   @Override
   public void addToolbarActions(ToolbarBuilder builder) {
     builder.addButton(myResourceActionSet.getResourceMoveUpAction().asToolbarAction())
-        .addButton(myResourceActionSet.getResourceMoveDownAction().asToolbarAction());
+            .addButton(myResourceActionSet.getResourceMoveDownAction().asToolbarAction());
   }
 
   public ResourceActionSet getResourceActionSet() {

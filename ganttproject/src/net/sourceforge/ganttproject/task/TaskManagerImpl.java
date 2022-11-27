@@ -498,11 +498,6 @@ public class TaskManagerImpl implements TaskManager {
     myTaskMap.addTask(task);
   }
 
-  @Override
-  public void restoreTask(Task task) {
-    myTaskMap.addTask(task);
-  }
-
   boolean isRegistered(TaskImpl task) {
     return myTaskMap.getTask(task.getTaskID()) != null;
   }
