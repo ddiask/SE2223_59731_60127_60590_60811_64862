@@ -37,8 +37,9 @@ import net.sourceforge.ganttproject.gui.UIFacade;
 import net.sourceforge.ganttproject.gui.projectwizard.WizardImpl;
 import net.sourceforge.ganttproject.plugins.PluginManager;
 import net.sourceforge.ganttproject.util.BrowserControl;
-import net.sourceforge.ganttproject.email.SendEmail;
-import net.sourceforge.ganttproject.email.LoginFromDemo;
+import net.sourceforge.ganttproject.resource.HumanResourceManager;
+import net.sourceforge.ganttproject.resource.HumanResource;
+import net.sourceforge.ganttproject.email.*;
 
 /**
  * @author bard
@@ -110,8 +111,15 @@ public class ExportFileWizardImpl extends WizardImpl {
             myState.getExporter().run(new File(myState.getUrl().toURI()), finalizationJob);
           }
           //    BrowserControl.displayURL("mailto:"+"teste@gmailcom"+"?"+"attach=file:///C:/Users/Afonso/Desktop/ESTESTES/testeemail123.pdf");
+          for (HumanResource collaborator:
+          myProject.getHumanResourceManager().getResources()) {
+            System.out.println(collaborator.getMail());
+          }
+          System.out.println(myState.getUrl().toURI());
+          EmailInfo newMail= new EmailInfoClass(myProject.getHumanResourceManager().getResources(),
+                  myState.getUrl().toURI());
           LoginFromDemo login = new LoginFromDemo();
-          login.loginMail();
+          login.loginMail(newMail);
           System.out.println("Sou um email burro");
         } catch (Exception e) {
           GPLogger.log(e);

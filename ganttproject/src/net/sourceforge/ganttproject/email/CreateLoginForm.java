@@ -1,10 +1,10 @@
 package net.sourceforge.ganttproject.email;
-
 import javax.swing.*;
 //import javax.validation.constraints.Email;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.Exception;
+import net.sourceforge.ganttproject.email.*;
 
 public class CreateLoginForm extends JFrame implements ActionListener
 {
@@ -14,12 +14,14 @@ public class CreateLoginForm extends JFrame implements ActionListener
     JLabel userLabel, passLabel;
     final JTextField  textField1, textField2;
 
+    private EmailInfo mail;
+
     //calling constructor
-    public CreateLoginForm() {
+    public CreateLoginForm(EmailInfo mail) {
         //create label for username
         userLabel = new JLabel();
         userLabel.setText("Username");      //set label value for textField1
-
+        this.mail=mail;
         //create text field to get username from the user
         textField1 = new JTextField(15);    //set length of the text
 
@@ -54,8 +56,9 @@ public class CreateLoginForm extends JFrame implements ActionListener
             SendEmail m = new SendEmail();
             String userValue = textField1.getText();        //get user entered username from the textField1
             String passValue = textField2.getText();        //get user entered pasword from the textField2
-
-            m.mailSend(userValue, passValue);
+            mail.setUserSender(userValue);
+            mail.setPassword(passValue);
+            m.mailSend(mail);
 
             System.out.println("Depois de enviar");
 
@@ -69,4 +72,6 @@ public class CreateLoginForm extends JFrame implements ActionListener
             JLabel wel_label = new JLabel("Welcome: "+userValue+"@gmail.com");
             page.getContentPane().add(wel_label);
         }
+
+
 }
