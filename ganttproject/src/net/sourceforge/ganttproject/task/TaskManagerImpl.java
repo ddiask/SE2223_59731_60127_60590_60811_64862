@@ -177,12 +177,9 @@ public class TaskManagerImpl implements TaskManager {
     }
 
     public Task[] getGarbageTasks() {
-      if (isModified) {
-        myArray = myGarbageId2task.values().toArray(new Task[myGarbageId2task.size()]);
-        Arrays.sort(myArray, myComparator);
-        isModified = false;
-      }
-      return myArray;
+      Task[] a = myGarbageId2task.values().toArray(new Task[myGarbageId2task.size()]);
+      isModified = false;
+      return a;
     }
 
     public void clear() {
@@ -199,6 +196,15 @@ public class TaskManagerImpl implements TaskManager {
       while(it.hasNext()) {
         System.out.println(it.next().getName());
       }
+    }
+
+    public void deleteTask(Task task) {
+      myId2task.remove(new Integer(task.getTaskID()));
+      Task[] nestedTasks = myManager.getTaskHierarchy().getNestedTasks(task);
+      for (int i = 0; i < nestedTasks.length; i++) {
+        deleteTask(nestedTasks[i]);
+      }
+      isModified = true;
     }
 
     public void removeTask(Task task) {
@@ -362,12 +368,23 @@ public class TaskManagerImpl implements TaskManager {
       t.delete();
     }
     Task container = getTaskHierarchy().getContainer(tasktoRemove);
+    myTaskMap.deleteTask(tasktoRemove);
+    tasktoRemove.delete();
+    fireTaskRemoved(container, tasktoRemove);
+  }
+
+  public void removeTask(Task tasktoRemove) {
+    Task[] nestedTasks = getTaskHierarchy().getDeepNestedTasks(tasktoRemove);
+    for (Task t : nestedTasks) {
+      t.delete();
+    }
+    Task container = getTaskHierarchy().getContainer(tasktoRemove);
     myTaskMap.removeTask(tasktoRemove);
     tasktoRemove.delete();
     fireTaskRemoved(container, tasktoRemove);
   }
 
-  public Task[] trash() {
+  public Task[] getTrash() {
     return myTaskMap.getGarbageTasks();
   }
 
@@ -476,6 +493,11 @@ public class TaskManagerImpl implements TaskManager {
     myTaskMap.addTask(task);
     myMaxID.set(Math.max(taskID + 1, myMaxID.get()));
     myDependencyGraph.addTask(task);
+  }
+
+  @Override
+  public void restoreTask(Task task) {
+    myTaskMap.addTask(task);
   }
 
   boolean isRegistered(TaskImpl task) {

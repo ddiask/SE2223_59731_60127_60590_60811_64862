@@ -1,17 +1,14 @@
 /*
 GanttProject is an opensource project management tool. License: GPL3
 Copyright (C) 2011 Dmitry Barashev
-
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 3
 of the License, or (at your option) any later version.
-
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
-
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -59,7 +56,7 @@ public class TaskTrashAction extends TaskActionBase {
 
   @Override
   protected boolean isEnabled(List<Task> selection) {
-    return !selection.isEmpty();
+    return true;
   }
 
   @Override
@@ -82,7 +79,6 @@ public class TaskTrashAction extends TaskActionBase {
       levelList.add(node);
     }
     getTree().stopEditing();
-
     for (List<DefaultMutableTreeTableNode> levelList : levelMap.values()) {
       for (DefaultMutableTreeTableNode node : levelList) {
         if (node != null && node instanceof TaskNode) {
@@ -94,15 +90,14 @@ public class TaskTrashAction extends TaskActionBase {
     }
     forwardScheduling();*/
 
-    final DefaultListModel<String> model = new DefaultListModel<>();
-    final JList<String> list = new JList<>(model);
+    final DefaultListModel<Task> data = new DefaultListModel<>();
+    final JList<Task> list = new JList<>(data);
     JFrame f = new JFrame();
 
-    model.addElement("A");
-    model.addElement("B");
-    model.addElement("C");
-    model.addElement("D");
-    model.addElement("E");
+    Task[] trash = getTaskManager().getTrash();
+    for(int i = 0; i < trash.length; i++) {
+      data.addElement(trash[i]);
+    }
 
     JPanel panel = new JPanel();
     panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
@@ -132,7 +127,8 @@ public class TaskTrashAction extends TaskActionBase {
         do {
           index = selmodel.getMinSelectionIndex();
           if (index >= 0) {
-            model.remove(index);
+            data.remove(index);
+
           }
         } while(index >= 0);
       }
@@ -140,7 +136,7 @@ public class TaskTrashAction extends TaskActionBase {
 
     removeall.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        model.clear();
+        data.clear();
       }
     });
 
@@ -151,7 +147,9 @@ public class TaskTrashAction extends TaskActionBase {
         do {
           index = selmodel.getMinSelectionIndex();
           if (index >= 0) {
-            model.remove(index);
+            System.out.println(data.get(index));
+            getTaskManager().restoreTask(data.get(index));
+            data.remove(index);
           }
         } while(index >= 0);
       }
@@ -159,7 +157,7 @@ public class TaskTrashAction extends TaskActionBase {
 
     restoreall.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        model.clear();
+        data.clear();
       }
     });
 
@@ -167,22 +165,6 @@ public class TaskTrashAction extends TaskActionBase {
     rightPanel.add(removeall);
     rightPanel.add(restore);
     rightPanel.add(restoreall);
-
-    /*delete.setPreferredSize(new Dimension(100, 30));
-    delete.setMaximumSize(new Dimension(100, 30));
-    delete.setMinimumSize(new Dimension(100, 30));
-
-    removeall.setPreferredSize(new Dimension(100, 30));
-    removeall.setMaximumSize(new Dimension(100, 30));
-    removeall.setMinimumSize(new Dimension(100, 30));
-
-    restore.setPreferredSize(new Dimension(100, 30));
-    restore.setMaximumSize(new Dimension(100, 30));
-    restore.setMinimumSize(new Dimension(100, 30));
-
-    restoreall.setPreferredSize(new Dimension(100, 30));
-    restoreall.setMaximumSize(new Dimension(100, 30));
-    restoreall.setMinimumSize(new Dimension(100, 30));*/
 
     rightPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
 
@@ -201,6 +183,7 @@ public class TaskTrashAction extends TaskActionBase {
   @Override
   public TaskTrashAction asToolbarAction() {
     TaskTrashAction result = new TaskTrashAction(getTaskManager(), getSelectionManager(), getUIFacade(), getTree());
+    result.setFontAwesomeLabel(UIUtil.getFontawesomeLabel(result));
     return result;
   }
 }
