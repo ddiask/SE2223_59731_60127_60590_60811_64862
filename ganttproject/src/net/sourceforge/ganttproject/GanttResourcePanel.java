@@ -21,6 +21,7 @@ package net.sourceforge.ganttproject;
 import com.google.common.collect.Lists;
 import net.sourceforge.ganttproject.action.ActiveActionProvider;
 import net.sourceforge.ganttproject.action.ArtefactDeleteAction;
+import net.sourceforge.ganttproject.action.ArtefactTrashAction;
 import net.sourceforge.ganttproject.action.GPAction;
 import net.sourceforge.ganttproject.action.resource.ResourceActionSet;
 import net.sourceforge.ganttproject.chart.Chart;
@@ -80,6 +81,7 @@ public class GanttResourcePanel extends TreeTableContainer<HumanResource, Resour
 
     final GPAction resourceDeleteAction = myResourceActionSet.getResourceDeleteAction();
     final GPAction assignmentDeleteAction = myResourceActionSet.getAssignmentDelete();
+    final GPAction assignmentTrashAction = myResourceActionSet.getTrash();
     GPAction deleteAction = new ArtefactDeleteAction(new ActiveActionProvider() {
       @Override
       public AbstractAction getActiveAction() {
@@ -89,7 +91,12 @@ public class GanttResourcePanel extends TreeTableContainer<HumanResource, Resour
         return resourceDeleteAction;
       }
     }, new Action[]{resourceDeleteAction, assignmentDeleteAction});
-    GPAction trashAction = null;
+    GPAction trashAction = new ArtefactTrashAction(new ActiveActionProvider() {
+      @Override
+      public AbstractAction getActiveAction() {
+          return assignmentTrashAction;
+      }
+    }, new Action[]{assignmentTrashAction});
     setArtefactActions(myResourceActionSet.getResourceNewAction(),
         myResourceActionSet.getResourcePropertiesAction(),
         deleteAction, trashAction);

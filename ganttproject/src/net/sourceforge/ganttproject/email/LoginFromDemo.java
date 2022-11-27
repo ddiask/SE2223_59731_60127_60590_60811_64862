@@ -25,7 +25,7 @@ public class LoginFromDemo
         {
             //create instance of the CreateLoginForm
             CreateLoginForm form = new CreateLoginForm(mail);
-            form.setSize(300,100);  //set size of the frame
+            form.setSize(300,300);  //set size of the frame
             form.setVisible(true);  //make form visible to the user
 
         }

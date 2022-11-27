@@ -494,6 +494,9 @@ public class TaskManagerImpl implements TaskManager {
     myMaxID.set(Math.max(taskID + 1, myMaxID.get()));
     myDependencyGraph.addTask(task);
   }
+  public void restoreTask(Task task) {
+    myTaskMap.addTask(task);
+  }
 
   @Override
   public void restoreTask(Task task) {

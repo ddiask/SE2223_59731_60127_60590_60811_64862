@@ -11,6 +11,8 @@ public class EmailInfoClass implements EmailInfo{
     private List<HumanResource> recipients;
     private String userSender;
     private String password;
+    private String subject;
+    private String body;
 
     public EmailInfoClass(List<HumanResource> recipients, URI path){
         this.recipients=recipients;
@@ -41,4 +43,19 @@ public class EmailInfoClass implements EmailInfo{
         return userSender;
     }
 
+    public void setBody(String body){
+        this.body=body;
+    }
+
+    public String getBody(){
+        return body;
+    }
+
+    public void setSubject(String subject){
+        this.subject=subject;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
 }
