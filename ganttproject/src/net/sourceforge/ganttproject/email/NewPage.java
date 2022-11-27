@@ -1,17 +1,21 @@
-//import required classes and packages
+
 package net.sourceforge.ganttproject.email;
 import javax.swing.*;
 import java.awt.*;
 
-//create NewPage class to create a new page on which user will navigate
+/**
+ * Create a pop up that informs the user that if the operation was successful
+ */
 public class NewPage extends JFrame
 {
+
+    private final static String TITLE="Information about E-mail";
     //constructor
     NewPage()
     {
         setDefaultCloseOperation(javax.swing.
                 WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Welcome");
+        setTitle(TITLE);
         setSize(400, 200);
     }
 }

@@ -11,4 +11,8 @@ public interface EmailInfo{
        public void setPassword(String password);
        public String getPassword();
        public String getUserSender();
+       public void setBody(String body);
+       public String getBody();
+       public void setSubject(String subject);
+       public String getSubject();
 }
