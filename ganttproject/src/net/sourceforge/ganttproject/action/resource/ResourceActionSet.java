@@ -42,6 +42,8 @@ public class ResourceActionSet {
 
   private final AssignmentDeleteAction myAssignmentDelete;
 
+  private final TrashAction myTrash;
+
   private AbstractAction[] myActions;
 
   public ResourceActionSet(ResourceContext resourceContext, AssignmentContext assignmentContext,
@@ -54,6 +56,7 @@ public class ResourceActionSet {
     myResourceMoveDownAction = new ResourceMoveDownAction(table);
     myResourceSendMailAction = new ResourceSendMailAction(table);
     myAssignmentDelete = new AssignmentDeleteAction(assignmentContext, uiFacade);
+    myTrash = new TrashAction(assignmentContext, uiFacade);
   }
 
   public AbstractAction[] getActions() {
@@ -92,5 +95,9 @@ public class ResourceActionSet {
 
   public AssignmentDeleteAction getAssignmentDelete() {
     return myAssignmentDelete;
+  }
+
+  public TrashAction getTrash() {
+    return myTrash;
   }
 }
