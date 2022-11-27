@@ -89,7 +89,7 @@ public class TaskDeleteAction extends TaskActionBase {
       for (DefaultMutableTreeTableNode node : levelList) {
         if (node != null && node instanceof TaskNode) {
           Task task = (Task) node.getUserObject();
-          getTaskManager().deleteTask(task);
+          getTaskManager().removeTask(task);
         }
       }
     }
@@ -99,7 +99,7 @@ public class TaskDeleteAction extends TaskActionBase {
   @Override
   public TaskDeleteAction asToolbarAction() {
     TaskDeleteAction result = new TaskDeleteAction(getTaskManager(), getSelectionManager(), getUIFacade(), getTree());
-    //result.setFontAwesomeLabel(UIUtil.getFontawesomeLabel(result));
+    result.setFontAwesomeLabel(UIUtil.getFontawesomeLabel(result));
     return result;
   }
 }

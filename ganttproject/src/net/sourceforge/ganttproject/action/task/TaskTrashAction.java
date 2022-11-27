@@ -36,8 +36,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.*;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.*;
+
 
 public class TaskTrashAction extends TaskActionBase {
 
@@ -63,7 +64,7 @@ public class TaskTrashAction extends TaskActionBase {
 
   @Override
   protected void run(List<Task> selection) throws Exception {
-    final DefaultMutableTreeTableNode[] cdmtn = getTree().getSelectedNodes();
+    /*final DefaultMutableTreeTableNode[] cdmtn = getTree().getSelectedNodes();
     Map<Integer, List<DefaultMutableTreeTableNode>> levelMap = new TreeMap<Integer, List<DefaultMutableTreeTableNode>>(new Comparator<Integer>() {
       @Override
       public int compare(Integer o1, Integer o2) {
@@ -91,12 +92,116 @@ public class TaskTrashAction extends TaskActionBase {
         }
       }
     }
-    forwardScheduling();
+    forwardScheduling();*/
+
+    final DefaultListModel<Task> data = new DefaultListModel<>();
+    final JList<Task> list = new JList<>(data);
+    JFrame f = new JFrame();
+
+    Task[] trash = getTaskManager().getTrash();
+    for(int i = 0; i < trash.length; i++) {
+      data.addElement(trash[i]);
+    }
+
+    JPanel panel = new JPanel();
+    panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+
+    JPanel leftPanel = new JPanel();
+    JPanel rightPanel = new JPanel();
+
+    leftPanel.setLayout(new BorderLayout());
+    rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+
+    list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+    list.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+
+    leftPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+    leftPanel.add(new JScrollPane(list));
+
+    JButton removeall = new JButton("Remove All");
+    JButton delete = new JButton("Delete");
+    JButton restore = new JButton("Restore");
+    JButton restoreall = new JButton("Restore All");
+
+    delete.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent event) {
+        ListSelectionModel selmodel = list.getSelectionModel();
+        int index = 0;
+        do {
+          index = selmodel.getMinSelectionIndex();
+          if (index >= 0) {
+            data.remove(index);
+
+          }
+        } while(index >= 0);
+      }
+    });
+
+    removeall.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        data.clear();
+      }
+    });
+
+    restore.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        ListSelectionModel selmodel = list.getSelectionModel();
+        int index = 0;
+        do {
+          index = selmodel.getMinSelectionIndex();
+          if (index >= 0) {
+            data.remove(index);
+          }
+        } while(index >= 0);
+      }
+    });
+
+    restoreall.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        data.clear();
+      }
+    });
+
+    rightPanel.add(delete);
+    rightPanel.add(removeall);
+    rightPanel.add(restore);
+    rightPanel.add(restoreall);
+
+    /*delete.setPreferredSize(new Dimension(100, 30));
+    delete.setMaximumSize(new Dimension(100, 30));
+    delete.setMinimumSize(new Dimension(100, 30));
+
+    removeall.setPreferredSize(new Dimension(100, 30));
+    removeall.setMaximumSize(new Dimension(100, 30));
+    removeall.setMinimumSize(new Dimension(100, 30));
+
+    restore.setPreferredSize(new Dimension(100, 30));
+    restore.setMaximumSize(new Dimension(100, 30));
+    restore.setMinimumSize(new Dimension(100, 30));
+
+    restoreall.setPreferredSize(new Dimension(100, 30));
+    restoreall.setMaximumSize(new Dimension(100, 30));
+    restoreall.setMinimumSize(new Dimension(100, 30));*/
+
+    rightPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
+
+    panel.add(leftPanel);
+    panel.add(rightPanel);
+
+    f.add(panel);
+
+    f.setSize(350, 250);
+    f.setLocationRelativeTo(null);
+    f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    f.setVisible(true);
+
   }
 
   @Override
   public TaskTrashAction asToolbarAction() {
     TaskTrashAction result = new TaskTrashAction(getTaskManager(), getSelectionManager(), getUIFacade(), getTree());
+    result.setFontAwesomeLabel(UIUtil.getFontawesomeLabel(result));
     return result;
   }
 }
