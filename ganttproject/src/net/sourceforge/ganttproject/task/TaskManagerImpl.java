@@ -84,6 +84,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Iterator;
 
 /**
  * @author bard
@@ -185,8 +186,19 @@ public class TaskManagerImpl implements TaskManager {
     }
 
     public void clear() {
+      myGarbageId2task.putAll(myId2task);
       myId2task.clear();
       isModified = true;
+      Iterator<Task> it = myId2task.values().iterator();
+      System.out.println("Tasks");
+      while(it.hasNext()) {
+        System.out.println(it.next().getName());
+      }
+      it = myGarbageId2task.values().iterator();
+      System.out.println("Trash");
+      while(it.hasNext()) {
+        System.out.println(it.next().getName());
+      }
     }
 
     public void removeTask(Task task) {
@@ -197,6 +209,16 @@ public class TaskManagerImpl implements TaskManager {
         removeTask(nestedTasks[i]);
       }
       isModified = true;
+      Iterator<Task> it = myId2task.values().iterator();
+      System.out.println("Tasks");
+      while(it.hasNext()) {
+        System.out.println(it.next().getName());
+      }
+      it = myGarbageId2task.values().iterator();
+      System.out.println("Trash");
+      while(it.hasNext()) {
+        System.out.println(it.next().getName());
+      }
     }
 
     public int size() {
