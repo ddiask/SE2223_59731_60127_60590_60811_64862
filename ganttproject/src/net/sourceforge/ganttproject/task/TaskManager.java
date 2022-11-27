@@ -222,7 +222,9 @@ public interface TaskManager {
 
   public void deleteTask(Task tasktoRemove);
 
-  public Task[] trash();
+  public void removeTask(Task tasktoRemove);
+
+  public Task[] getTrash();
 
   CustomPropertyManager getCustomPropertyManager();
 

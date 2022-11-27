@@ -94,15 +94,14 @@ public class TaskTrashAction extends TaskActionBase {
     }
     forwardScheduling();*/
 
-    final DefaultListModel<String> model = new DefaultListModel<>();
-    final JList<String> list = new JList<>(model);
+    final DefaultListModel<Task> data = new DefaultListModel<>();
+    final JList<Task> list = new JList<>(data);
     JFrame f = new JFrame();
 
-    model.addElement("A");
-    model.addElement("B");
-    model.addElement("C");
-    model.addElement("D");
-    model.addElement("E");
+    Task[] trash = getTaskManager().getTrash();
+    for(int i = 0; i < trash.length; i++) {
+      data.addElement(trash[i]);
+    }
 
     JPanel panel = new JPanel();
     panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
@@ -132,7 +131,8 @@ public class TaskTrashAction extends TaskActionBase {
         do {
           index = selmodel.getMinSelectionIndex();
           if (index >= 0) {
-            model.remove(index);
+            data.remove(index);
+
           }
         } while(index >= 0);
       }
@@ -140,7 +140,7 @@ public class TaskTrashAction extends TaskActionBase {
 
     removeall.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        model.clear();
+        data.clear();
       }
     });
 
@@ -151,7 +151,7 @@ public class TaskTrashAction extends TaskActionBase {
         do {
           index = selmodel.getMinSelectionIndex();
           if (index >= 0) {
-            model.remove(index);
+            data.remove(index);
           }
         } while(index >= 0);
       }
@@ -159,7 +159,7 @@ public class TaskTrashAction extends TaskActionBase {
 
     restoreall.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        model.clear();
+        data.clear();
       }
     });
 
@@ -201,6 +201,7 @@ public class TaskTrashAction extends TaskActionBase {
   @Override
   public TaskTrashAction asToolbarAction() {
     TaskTrashAction result = new TaskTrashAction(getTaskManager(), getSelectionManager(), getUIFacade(), getTree());
+    result.setFontAwesomeLabel(UIUtil.getFontawesomeLabel(result));
     return result;
   }
 }
