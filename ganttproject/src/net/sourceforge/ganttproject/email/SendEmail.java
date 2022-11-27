@@ -56,10 +56,13 @@ public class SendEmail {
             t.setContextClassLoader(session.getClass().getClassLoader());
             try {
                 Transport.send(message);
-            } finally {
-                t.setContextClassLoader(ccl);
-                return SUCCESS;
-            }
+
+            } catch (Exception e){
+                return PROBLEM;
+            } //finally {
+            t.setContextClassLoader(ccl);
+            return SUCCESS;
+            //}
         } catch (MessagingException mex) {
             return PROBLEM;
             //mex.printStackTrace();
