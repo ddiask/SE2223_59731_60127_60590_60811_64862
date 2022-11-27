@@ -189,7 +189,7 @@ public interface TaskManager {
 
   public class Access {
     public static TaskManager newInstance(TaskContainmentHierarchyFacade.Factory containmentFacadeFactory,
-        TaskManagerConfig config) {
+                                          TaskManagerConfig config) {
       return new TaskManagerImpl(containmentFacadeFactory, config);
     }
   }
@@ -207,10 +207,10 @@ public interface TaskManager {
   public TaskManager emptyClone();
 
   public Map<Task, Task> importData(TaskManager taskManager,
-      Map<CustomPropertyDefinition, CustomPropertyDefinition> customPropertyMapping);
+                                    Map<CustomPropertyDefinition, CustomPropertyDefinition> customPropertyMapping);
 
   public void importAssignments(TaskManager importedTaskManager, HumanResourceManager hrManager,
-      Map<Task, Task> original2importedTask, Map<HumanResource, HumanResource> original2importedResource);
+                                Map<Task, Task> original2importedTask, Map<HumanResource, HumanResource> original2importedResource);
 
   /**
    * Processes the critical path finding on <code>root</code> tasks.
@@ -221,6 +221,8 @@ public interface TaskManager {
   public void processCriticalPath(Task root);
 
   public void deleteTask(Task tasktoRemove);
+
+  public Task[] trash();
 
   CustomPropertyManager getCustomPropertyManager();
 
