@@ -186,16 +186,6 @@ public class TaskManagerImpl implements TaskManager {
       myGarbageId2task.putAll(myId2task);
       myId2task.clear();
       isModified = true;
-      Iterator<Task> it = myId2task.values().iterator();
-      System.out.println("Tasks");
-      while(it.hasNext()) {
-        System.out.println(it.next().getName());
-      }
-      it = myGarbageId2task.values().iterator();
-      System.out.println("Trash");
-      while(it.hasNext()) {
-        System.out.println(it.next().getName());
-      }
     }
 
     public void deleteTask(Task task) {
@@ -215,16 +205,26 @@ public class TaskManagerImpl implements TaskManager {
         removeTask(nestedTasks[i]);
       }
       isModified = true;
-      Iterator<Task> it = myId2task.values().iterator();
-      System.out.println("Tasks");
-      while(it.hasNext()) {
-        System.out.println(it.next().getName());
-      }
-      it = myGarbageId2task.values().iterator();
-      System.out.println("Trash");
-      while(it.hasNext()) {
-        System.out.println(it.next().getName());
-      }
+    }
+
+    public void deleteTaskPermanently(Task task) {
+      myGarbageId2task.remove(new Integer(task.getTaskID()));
+      isModified = true;
+    }
+
+    public void deleteTrashPermanently() {
+      myGarbageId2task.clear();
+      isModified = true;
+    }
+
+    public void restoreTask(Task task) {
+      myGarbageId2task.remove(new Integer(task.getTaskID()));
+    }
+
+    public void restoreTrash() {
+      myId2task.putAll(myGarbageId2task);
+      myGarbageId2task.clear();
+      isModified = true;
     }
 
     public int size() {
@@ -494,8 +494,45 @@ public class TaskManagerImpl implements TaskManager {
     myMaxID.set(Math.max(taskID + 1, myMaxID.get()));
     myDependencyGraph.addTask(task);
   }
+
+  public void deleteTaskPermanently(Task task) {
+    myTaskMap.deleteTaskPermanently(task);
+  }
+
+  public void deleteTrashPermanently() {
+    myTaskMap.deleteTrashPermanently();
+  }
+
   public void restoreTask(Task task) {
-    myTaskMap.addTask(task);
+    Task aux = newTaskBuilder().withId(task.getTaskID()).build();
+    aux.setName(task.getName());
+    aux.setStart(task.getStart());
+    aux.setDuration(task.getDuration());
+    aux.setColor(task.getColor());
+    aux.setPriority(task.getPriority());
+    aux.setExpand(task.getExpand());
+    aux.setNotes(task.getNotes());
+    aux.setWebLink(task.getWebLink());
+    aux.setCompletionPercentage(task.getCompletionPercentage());
+    aux.getCost().setValue(task.getCost().getValue());
+    aux.setMilestone(task.isMilestone());
+
+    List<HumanResource> hrlist = task.getManager().getConfig().getResourceManager().getResources();
+    Iterator<HumanResource> it = hrlist.iterator();
+    while(it.hasNext()) {
+      HumanResource hr = it.next();
+      System.out.println(hr);
+      aux.getManager().getConfig().getResourceManager().add(hr);
+    }
+
+    myTaskMap.restoreTask(task);
+
+
+
+  }
+
+  public void restoreTrash() {
+    myTaskMap.restoreTrash();
   }
 
   boolean isRegistered(TaskImpl task) {
@@ -854,6 +891,7 @@ public class TaskManagerImpl implements TaskManager {
     }
   }
 
+  @Override
   public TaskManagerConfig getConfig() {
     return myConfig;
   }

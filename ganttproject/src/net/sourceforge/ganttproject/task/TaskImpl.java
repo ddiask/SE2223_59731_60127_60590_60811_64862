@@ -1,17 +1,14 @@
 /*
 GanttProject is an opensource project management tool.
 Copyright (C) 2004-2011 GanttProject Team
-
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 3
 of the License, or (at your option) any later version.
-
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
-
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -248,6 +245,7 @@ public class TaskImpl implements Task {
     return myName;
   }
 
+  @Override
   public String getWebLink() {
     return myWebLink;
   }
@@ -383,9 +381,9 @@ public class TaskImpl implements Task {
       }
       if (!allMilestones) {
         GPLogger.getLogger(Task.class).warning(String.format(
-            "This is probably a bug. Task #%d (%s) has end date=%s equal to start date." +
-            "It could be possible if all child tasks were milestones, however they are not. Child tasks: %s",
-            getTaskID(), getName(), modelEnd, Arrays.asList(deepNestedTasks)));
+                "This is probably a bug. Task #%d (%s) has end date=%s equal to start date." +
+                        "It could be possible if all child tasks were milestones, however they are not. Child tasks: %s",
+                getTaskID(), getName(), modelEnd, Arrays.asList(deepNestedTasks)));
       }
       return modelEnd;
     }
@@ -430,13 +428,13 @@ public class TaskImpl implements Task {
       return EMPTY_DURATION;
     }
     return (myMutator != null && myMutator.myIsolationLevel == TaskMutator.READ_UNCOMMITED) ? myMutator.getDuration()
-        : myLength;
+            : myLength;
   }
 
   @Override
   public int getCompletionPercentage() {
     return (myMutator != null && myMutator.myIsolationLevel == TaskMutator.READ_UNCOMMITED) ? myMutator.getCompletionPercentage()
-        : myCompletionPercentage;
+            : myCompletionPercentage;
   }
 
   @Override
@@ -680,7 +678,7 @@ public class TaskImpl implements Task {
       if (myActivities == null && (myStartChange != null) || (myDurationChange != null)) {
         myActivities = new ArrayList<TaskActivity>();
         TaskImpl.recalculateActivities(myManager.getConfig().getCalendar(), TaskImpl.this, myActivities,
-            getStart().getTime(), TaskImpl.this.getEnd().getTime());
+                getStart().getTime(), TaskImpl.this.getEnd().getTime());
       }
       return myActivities;
     }
@@ -875,7 +873,7 @@ public class TaskImpl implements Task {
     @Override
     public int getCompletionPercentage() {
       return myCompletionPercentageChange == null ? TaskImpl.this.myCompletionPercentage
-          : ((Integer) myCompletionPercentageChange.myFieldValue).intValue();
+              : ((Integer) myCompletionPercentageChange.myFieldValue).intValue();
     }
 
     GanttCalendar getStart() {
@@ -1037,7 +1035,7 @@ public class TaskImpl implements Task {
         }
       } else {
         newStart = RESTLESS_CALENDAR.shiftDate(clone.getStart().getTime(),
-            getManager().createLength(clone.getDuration().getTimeUnit(), (long) unitCount));
+                getManager().createLength(clone.getDuration().getTimeUnit(), (long) unitCount));
         if (0 == (getManager().getCalendar().getDayMask(newStart) & DayMask.WORKING)) {
           newStart = getManager().getCalendar().findClosest(newStart, myLength.getTimeUnit(), MoveDirection.BACKWARD, DayType.WORKING);
         }
@@ -1108,7 +1106,7 @@ public class TaskImpl implements Task {
   }
 
   private static void recalculateActivities(GPCalendarCalc calendar, Task task, List<TaskActivity> output, Date startDate,
-      Date endDate) {
+                                            Date endDate) {
     TaskActivitiesAlgorithm alg = new TaskActivitiesAlgorithm(calendar);
     alg.recalculateActivities(task, output, startDate, endDate);
   }

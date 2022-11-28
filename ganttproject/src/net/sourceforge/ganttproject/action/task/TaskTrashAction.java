@@ -131,8 +131,8 @@ public class TaskTrashAction extends TaskActionBase {
         do {
           index = selmodel.getMinSelectionIndex();
           if (index >= 0) {
+            getTaskManager().deleteTaskPermanently(data.get(index));
             data.remove(index);
-
           }
         } while(index >= 0);
       }
@@ -140,6 +140,7 @@ public class TaskTrashAction extends TaskActionBase {
 
     removeall.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        getTaskManager().deleteTrashPermanently();
         data.clear();
       }
     });
@@ -151,7 +152,6 @@ public class TaskTrashAction extends TaskActionBase {
         do {
           index = selmodel.getMinSelectionIndex();
           if (index >= 0) {
-            System.out.println(data.get(index));
             getTaskManager().restoreTask(data.get(index));
             data.remove(index);
           }
@@ -161,6 +161,7 @@ public class TaskTrashAction extends TaskActionBase {
 
     restoreall.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        getTaskManager().restoreTrash();
         data.clear();
       }
     });

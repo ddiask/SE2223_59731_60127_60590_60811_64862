@@ -154,8 +154,6 @@ public interface TaskManager {
 
   public void registerTask(Task task);
 
-  public void restoreTask(Task task);
-
   public GanttTask createTask();
 
   @Deprecated
@@ -225,6 +223,14 @@ public interface TaskManager {
 
   public Task[] getTrash();
 
+  public void deleteTaskPermanently(Task task);
+
+  public void deleteTrashPermanently();
+
+  public void restoreTask(Task task);
+
+  public void restoreTrash();
+
   CustomPropertyManager getCustomPropertyManager();
 
   StringOption getTaskNamePrefixOption();
@@ -244,4 +250,7 @@ public interface TaskManager {
   ProjectEventListener getProjectListener();
 
   GPCalendarListener getCalendarListener();
+
+  TaskManagerConfig getConfig();
+
 }
