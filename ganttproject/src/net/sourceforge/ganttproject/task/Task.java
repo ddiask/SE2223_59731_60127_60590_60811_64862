@@ -20,6 +20,7 @@ import biz.ganttproject.core.time.GanttCalendar;
 import biz.ganttproject.core.time.TimeDuration;
 import net.sourceforge.ganttproject.document.Document;
 import net.sourceforge.ganttproject.task.dependency.TaskDependencySlice;
+import net.sourceforge.ganttproject.resource.HumanResource;
 
 import java.awt.*;
 import java.math.BigDecimal;
@@ -161,6 +162,8 @@ public interface Task extends MutableTask {
   void move(Task targetSupertask, int position);
 
   void delete();
+
+  void addHumanResource(HumanResource human);
 
   TaskManager getManager();
 

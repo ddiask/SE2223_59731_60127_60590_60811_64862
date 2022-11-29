@@ -42,6 +42,7 @@ import net.sourceforge.ganttproject.task.dependency.TaskDependencySliceAsDepende
 import net.sourceforge.ganttproject.task.dependency.TaskDependencySliceImpl;
 import net.sourceforge.ganttproject.task.hierarchy.TaskHierarchyItem;
 import net.sourceforge.ganttproject.util.collect.Pair;
+import net.sourceforge.ganttproject.resource.HumanResource;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
@@ -509,6 +510,11 @@ public class TaskImpl implements Task {
   public void delete() {
     getDependencies().clear();
     getAssignmentCollection().clear();
+  }
+
+  @Override
+  public void addHumanResource(HumanResource human) {
+    myAssignments.addAssignment(human);
   }
 
   @Override

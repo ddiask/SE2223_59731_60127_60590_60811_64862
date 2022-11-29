@@ -39,6 +39,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import net.sourceforge.ganttproject.task.ResourceAssignment;
+
 
 public class TaskTrashAction extends TaskActionBase {
 

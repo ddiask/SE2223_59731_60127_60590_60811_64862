@@ -71,6 +71,8 @@ import net.sourceforge.ganttproject.task.event.TaskScheduleEvent;
 import net.sourceforge.ganttproject.task.hierarchy.TaskHierarchyManagerImpl;
 import net.sourceforge.ganttproject.util.collect.Pair;
 
+import net.sourceforge.ganttproject.resource.HumanResource;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -143,6 +145,7 @@ public class TaskManagerImpl implements TaskManager {
   private static class TaskMap {
     private final Map<Integer, Task> myId2task = new HashMap<Integer, Task>();
     private final Map<Integer, Task> myGarbageId2task = new HashMap<Integer, Task>();
+    private final Map<Integer, ResourceAssignment[]> myGarbageId2assignment = new HashMap<Integer, ResourceAssignment[]>();
     private TaskDocumentOrderComparator myComparator;
     private boolean isModified = true;
     private Task[] myArray;
@@ -159,7 +162,9 @@ public class TaskManagerImpl implements TaskManager {
     }
 
     void addTaskToGarbage(Task task){
-      myGarbageId2task.put(new Integer(task.getTaskID()), task);
+      Integer i = new Integer(task.getTaskID());
+      myGarbageId2task.put(i, task);
+      myGarbageId2assignment.put(i, task.getAssignments());
       isModified = true;
     }
 
@@ -177,7 +182,9 @@ public class TaskManagerImpl implements TaskManager {
     }
 
     public Task[] getGarbageTasks() {
+
       Task[] a = myGarbageId2task.values().toArray(new Task[myGarbageId2task.size()]);
+
       isModified = false;
       return a;
     }
@@ -219,6 +226,7 @@ public class TaskManagerImpl implements TaskManager {
 
     public void restoreTask(Task task) {
       myGarbageId2task.remove(new Integer(task.getTaskID()));
+      isModified = true;
     }
 
     public void restoreTrash() {
@@ -478,6 +486,49 @@ public class TaskManagerImpl implements TaskManager {
     };
   }
 
+  public TaskBuilder newTaskBuilder(Task a) {
+    final Task task = a;
+    return new TaskBuilder() {
+      public Task build() {
+
+        Task aux = new GanttTask(TaskManagerImpl.this, (TaskImpl) task);
+
+        aux.setName(task.getName());
+        aux.setStart(task.getStart());
+        aux.setDuration(task.getDuration());
+        aux.setColor(task.getColor());
+        aux.setPriority(task.getPriority());
+        aux.setExpand(task.getExpand());
+        aux.setNotes(task.getNotes());
+        aux.setWebLink(task.getWebLink());
+        aux.setCompletionPercentage(task.getCompletionPercentage());
+        aux.getCost().setValue(task.getCost().getValue());
+        aux.setMilestone(task.isMilestone());
+
+        registerTask(task);
+
+        ResourceAssignment[] assignments = myTaskMap.myGarbageId2assignment.get(task.getTaskID());
+        for(int i = 0; i < assignments.length; i++) {
+          //System.out.println(assignments[i].getResource().getName());
+          aux.addHumanResource(assignments[i].getResource());
+        }
+
+        if (myPrevSibling != null && myPrevSibling != getRootTask()) {
+          int position = getTaskHierarchy().getTaskIndex(myPrevSibling) + 1;
+          Task parentTask = getTaskHierarchy().getContainer(myPrevSibling);
+          getTaskHierarchy().move(task, parentTask, position);
+        } else {
+          Task parentTask = myParent == null ? getRootTask() : myParent;
+          getTaskHierarchy().move(task, parentTask);
+        }
+
+        fireTaskAdded(task);
+        return task;
+
+      }
+    };
+  }
+
   protected TimeUnitStack getTimeUnitStack() {
     return getConfig().getTimeUnitStack();
   }
@@ -504,7 +555,8 @@ public class TaskManagerImpl implements TaskManager {
   }
 
   public void restoreTask(Task task) {
-    Task aux = newTaskBuilder().withId(task.getTaskID()).build();
+    Task aux = createTask(task.getTaskID());
+
     aux.setName(task.getName());
     aux.setStart(task.getStart());
     aux.setDuration(task.getDuration());
@@ -517,18 +569,12 @@ public class TaskManagerImpl implements TaskManager {
     aux.getCost().setValue(task.getCost().getValue());
     aux.setMilestone(task.isMilestone());
 
-    List<HumanResource> hrlist = task.getManager().getConfig().getResourceManager().getResources();
-    Iterator<HumanResource> it = hrlist.iterator();
-    while(it.hasNext()) {
-      HumanResource hr = it.next();
-      System.out.println(hr);
-      aux.getManager().getConfig().getResourceManager().add(hr);
+    ResourceAssignment[] assignments = myTaskMap.myGarbageId2assignment.get(task.getTaskID());
+    for(int i = 0; i < assignments.length; i++) {
+      aux.addHumanResource(assignments[i].getResource());
     }
 
     myTaskMap.restoreTask(task);
-
-
-
   }
 
   public void restoreTrash() {
