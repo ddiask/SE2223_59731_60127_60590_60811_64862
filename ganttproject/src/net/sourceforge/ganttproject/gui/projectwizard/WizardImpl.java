@@ -151,6 +151,21 @@ public abstract class WizardImpl {
     myDialog.show();
   }
 
+  public void showNew() {
+    for (int i = 0; i < myPages.size(); i++) {
+      WizardPage page = myPages.get(i);
+      addPageComponent(page, i);
+    }
+    myCardLayout.first(myPagesContainer);
+    getCurrentPage().setActive(true);
+    myPagesContainer.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    adjustButtonState();
+    myDialog = myUIFacade.createDialog(myPagesContainer, new Action[] { myBackAction, myNextAction, myOkAction,
+            myCancelAction }, myTitle);
+    myDialog.center(Centering.SCREEN);
+    myDialog.show();
+  }
+
   protected void addPageComponent(WizardPage page, int index) {
     String currentTitle = getCurrentPage().getTitle();
     JPanel pagePanel = new JPanel(new BorderLayout());

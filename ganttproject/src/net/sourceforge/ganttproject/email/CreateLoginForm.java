@@ -54,10 +54,12 @@ public class CreateLoginForm extends JFrame implements ActionListener
         newPanel.add(textField3);   //set text field to panel
         newPanel.add(bodyLabel);    //set password label to panel
         newPanel.add(textField4);   //set text field to panel
-        newPanel.add(b1);           //set button to panel
+        //newPanel.add(b1);           //set button to panel
 
         //set border to panel
         add(newPanel, BorderLayout.CENTER);
+        setLocationRelativeTo(null);
+        add(newPanel.add(b1), BorderLayout.PAGE_END);
 
         //perform action on button click
         b1.addActionListener(this);     //add action listener to button

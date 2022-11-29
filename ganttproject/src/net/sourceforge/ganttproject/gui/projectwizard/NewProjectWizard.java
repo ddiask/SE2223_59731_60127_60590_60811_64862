@@ -31,7 +31,7 @@ public class NewProjectWizard {
     newProjectWizard.addProjectNamePage(project);
     newProjectWizard.addRoleSetPage(roleSets);
     newProjectWizard.addWeekendConfigurationPage(project);
-    newProjectWizard.show();
+    newProjectWizard.showNew();
     return new PrjInfos();
   }
 
