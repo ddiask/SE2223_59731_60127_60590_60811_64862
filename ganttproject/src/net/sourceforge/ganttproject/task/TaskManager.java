@@ -229,7 +229,7 @@ public interface TaskManager {
 
   public void restoreTask(Task task);
 
-  public void restoreTrash();
+  public void restoreAllTrash();
 
   CustomPropertyManager getCustomPropertyManager();
 

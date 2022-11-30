@@ -44,18 +44,14 @@ import net.sourceforge.ganttproject.task.ResourceAssignment;
 
 public class TaskTrashAction extends TaskActionBase {
 
-  private JFrame f;
-
   public TaskTrashAction(TaskManager taskManager, TaskSelectionManager selectionManager, UIFacade uiFacade,
                          GanttTree2 tree) {
     super("task.trash", taskManager, selectionManager, uiFacade, tree);
-    f = new JFrame();
   }
 
   private TaskTrashAction(TaskManager taskManager, TaskSelectionManager selectionManager, UIFacade uiFacade,
                           GanttTree2 tree, IconSize size) {
     super("task.trash", taskManager, selectionManager, uiFacade, tree, size);
-    f = new JFrame();
   }
 
   @Override
@@ -70,6 +66,9 @@ public class TaskTrashAction extends TaskActionBase {
 
   @Override
   protected void run(List<Task> selection) throws Exception {
+
+    JFrame f = new JFrame();
+
     final DefaultListModel<Task> data = new DefaultListModel<>();
     final JList<Task> list = new JList<>(data);
 
@@ -136,7 +135,7 @@ public class TaskTrashAction extends TaskActionBase {
 
     restoreall.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        getTaskManager().restoreTrash();
+        getTaskManager().restoreAllTrash();
         data.clear();
       }
     });
@@ -157,6 +156,16 @@ public class TaskTrashAction extends TaskActionBase {
     f.setLocationRelativeTo(null);
     f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     f.setVisible(true);
+
+    getUIFacade().getMainFrame().setEnabled(false);
+
+    f.addWindowListener(new java.awt.event.WindowAdapter() {
+      @Override
+      public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+        getUIFacade().getMainFrame().setEnabled(true);
+      }
+    });
+
   }
 
   @Override

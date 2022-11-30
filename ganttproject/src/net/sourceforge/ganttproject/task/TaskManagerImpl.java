@@ -577,7 +577,7 @@ public class TaskManagerImpl implements TaskManager {
     myTaskMap.restoreTask(task);
   }
 
-  public void restoreTrash() {
+  public void restoreAllTrash() {
     myTaskMap.restoreTrash();
   }
 
