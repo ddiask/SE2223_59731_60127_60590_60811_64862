@@ -42,7 +42,13 @@ public class SendEmail {
             MimeBodyPart attachmentPart = new MimeBodyPart();
             MimeBodyPart textPart = new MimeBodyPart();
             try {
-                File file = new File(mail.getPath());
+                File file;
+                if(mail.isValidPath()) {
+                    file = new File(mail.getPath());
+                }
+                else {
+                    return PROBLEM;
+                }
                 attachmentPart.attachFile(file);
                 textPart.setText(mail.getBody());
                 multipart.addBodyPart(textPart);

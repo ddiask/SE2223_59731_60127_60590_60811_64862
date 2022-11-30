@@ -15,4 +15,5 @@ public interface EmailInfo{
        public String getBody();
        public void setSubject(String subject);
        public String getSubject();
+       public boolean isValidPath();
 }

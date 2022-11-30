@@ -110,8 +110,6 @@ public abstract class WizardImpl {
         onCancelPressed();
       }
     };
-
-
   }
 
   public void nextPage() {

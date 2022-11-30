@@ -126,7 +126,8 @@ public class BaselineDialogAction extends GPAction {
       }
     });
 
-    Action action = new EmailAction() {
+
+    Action action = new OkAction() {
       @Override
       public void actionPerformed(ActionEvent e) {
         list.stopEditing();
@@ -139,37 +140,9 @@ public class BaselineDialogAction extends GPAction {
       }
     };
 
-    Action action1 = new OkAction() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        list.stopEditing();
-        myProject.getBaselines().clear();
-        myProject.getBaselines().addAll(myBaselines);
-        for (GanttPreviousState trashBaseline : myTrash) {
-          trashBaseline.remove();
-        }
-        myProject.setModified();
-      }
-    };
-
-    Action[] actions = new Action[] { action, action1, CancelAction.EMPTY };
+    Action[] actions = new Action[] { action, CancelAction.EMPTY };
 
 
-
-  /*
-    Action[] actions = new Action[] { new OkAction() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        list.stopEditing();
-        myProject.getBaselines().clear();
-        myProject.getBaselines().addAll(myBaselines);
-        for (GanttPreviousState trashBaseline : myTrash) {
-          trashBaseline.remove();
-        }
-        myProject.setModified();
-      }
-    }, CancelAction.EMPTY };
-    */
 
 
     OptionsPageBuilder optionsBuilder = new OptionsPageBuilder();

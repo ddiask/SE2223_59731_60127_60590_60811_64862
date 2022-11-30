@@ -3,6 +3,7 @@ import java.util.*;
 import java.io.File;
 import java.net.*;
 import net.sourceforge.ganttproject.resource.*;
+import java.nio.file.Paths;
 
 
 public class EmailInfoClass implements EmailInfo{
@@ -57,5 +58,11 @@ public class EmailInfoClass implements EmailInfo{
 
     public String getSubject() {
         return subject;
+    }
+
+    public boolean isValidPath() {
+        if(path.getPath()==null)
+            return false;
+        return true;
     }
 }
