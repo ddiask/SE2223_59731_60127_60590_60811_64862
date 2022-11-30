@@ -155,6 +155,8 @@ public class TaskTrashAction extends TaskActionBase {
     f.setSize(350, 250);
     f.setLocationRelativeTo(null);
     f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    Image icon = Toolkit.getDefaultToolkit().getImage("..\\..\\ganttproject\\data\\resources\\logos\\icon16.png");
+    f.setIconImage(icon);
     f.setVisible(true);
 
     getUIFacade().getMainFrame().setEnabled(false);

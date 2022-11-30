@@ -119,7 +119,7 @@ public class ExportFileWizardImpl extends WizardImpl {
           EmailInfo newMail= new EmailInfoClass(myProject.getHumanResourceManager().getResources(),
                   myState.getUrl().toURI());
           LoginFromDemo login = new LoginFromDemo();
-          login.loginMail(newMail);
+          login.loginMail(newMail, getUIFacade());
           System.out.println("Sou um email burro");
         } catch (Exception e) {
           GPLogger.log(e);

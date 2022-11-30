@@ -8,6 +8,7 @@ import java.awt.event.*;
 import java.lang.Exception;
 import net.sourceforge.ganttproject.email.CreateLoginForm;
 import net.sourceforge.ganttproject.email.*;
+import net.sourceforge.ganttproject.gui.UIFacade;
 //create CreateLoginForm class to create login form
 //class extends JFrame to create a window where our component add
 //class implements ActionListener to perform an action on button click
@@ -19,12 +20,12 @@ import net.sourceforge.ganttproject.email.*;
 public class LoginFromDemo
 {
     //main() method start
-    public void loginMail(EmailInfo mail)
+    public void loginMail(EmailInfo mail, UIFacade uiFacade)
     {
         try
         {
             //create instance of the CreateLoginForm
-            CreateLoginForm form = new CreateLoginForm(mail);
+            CreateLoginForm form = new CreateLoginForm(mail, uiFacade);
             //form.setSize(300,300);  //set size of the frame
             form.pack();
 

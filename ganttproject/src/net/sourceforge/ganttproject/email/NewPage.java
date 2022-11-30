@@ -17,5 +17,7 @@ public class NewPage extends JFrame
                 WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(TITLE);
         setSize(400, 200);
+        Image icon = Toolkit.getDefaultToolkit().getImage("..\\..\\ganttproject\\data\\resources\\logos\\icon16.png");
+        setIconImage(icon);
     }
 }

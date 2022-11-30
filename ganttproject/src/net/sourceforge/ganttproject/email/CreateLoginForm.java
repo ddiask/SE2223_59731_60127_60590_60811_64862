@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.lang.Exception;
 import net.sourceforge.ganttproject.email.*;
+import net.sourceforge.ganttproject.gui.UIFacade;
 
 public class CreateLoginForm extends JFrame implements ActionListener
 {
@@ -17,7 +18,7 @@ public class CreateLoginForm extends JFrame implements ActionListener
     private EmailInfo mail;
 
     //calling constructor
-    public CreateLoginForm(EmailInfo mail) {
+    public CreateLoginForm(EmailInfo mail, final UIFacade uiFacade) {
         this.mail=mail;
         //create label for username
         userLabel = new JLabel();
@@ -55,6 +56,19 @@ public class CreateLoginForm extends JFrame implements ActionListener
         newPanel.add(bodyLabel);    //set password label to panel
         newPanel.add(textField4);   //set text field to panel
         //newPanel.add(b1);           //set button to panel
+
+
+        Image icon = Toolkit.getDefaultToolkit().getImage("..\\..\\ganttproject\\data\\resources\\logos\\icon16.png");
+        setIconImage(icon);
+
+        uiFacade.getMainFrame().setEnabled(false);
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                uiFacade.getMainFrame().setEnabled(true);
+            }
+        });
 
         //set border to panel
         add(newPanel, BorderLayout.CENTER);
