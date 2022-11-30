@@ -44,14 +44,18 @@ import net.sourceforge.ganttproject.task.ResourceAssignment;
 
 public class TaskTrashAction extends TaskActionBase {
 
+  private JFrame f;
+
   public TaskTrashAction(TaskManager taskManager, TaskSelectionManager selectionManager, UIFacade uiFacade,
                          GanttTree2 tree) {
     super("task.trash", taskManager, selectionManager, uiFacade, tree);
+    f = new JFrame();
   }
 
   private TaskTrashAction(TaskManager taskManager, TaskSelectionManager selectionManager, UIFacade uiFacade,
                           GanttTree2 tree, IconSize size) {
     super("task.trash", taskManager, selectionManager, uiFacade, tree, size);
+    f = new JFrame();
   }
 
   @Override
@@ -66,39 +70,8 @@ public class TaskTrashAction extends TaskActionBase {
 
   @Override
   protected void run(List<Task> selection) throws Exception {
-    /*final DefaultMutableTreeTableNode[] cdmtn = getTree().getSelectedNodes();
-    Map<Integer, List<DefaultMutableTreeTableNode>> levelMap = new TreeMap<Integer, List<DefaultMutableTreeTableNode>>(new Comparator<Integer>() {
-      @Override
-      public int compare(Integer o1, Integer o2) {
-        // descending order
-        return o2.compareTo(o1);
-      }
-    });
-    for (DefaultMutableTreeTableNode node : cdmtn) {
-      int level = TreeUtil.getLevel(node);
-      List<DefaultMutableTreeTableNode> levelList = levelMap.get(level);
-      if (levelList == null) {
-        levelList = Lists.newArrayList();
-        levelMap.put(level, levelList);
-      }
-      levelList.add(node);
-    }
-    getTree().stopEditing();
-
-    for (List<DefaultMutableTreeTableNode> levelList : levelMap.values()) {
-      for (DefaultMutableTreeTableNode node : levelList) {
-        if (node != null && node instanceof TaskNode) {
-          Task task = (Task) node.getUserObject();
-          //getTaskManager().deleteTask(task);
-          System.out.println(getTaskManager().trash()[0]);
-        }
-      }
-    }
-    forwardScheduling();*/
-
     final DefaultListModel<Task> data = new DefaultListModel<>();
     final JList<Task> list = new JList<>(data);
-    JFrame f = new JFrame();
 
     Task[] trash = getTaskManager().getTrash();
     for(int i = 0; i < trash.length; i++) {
@@ -121,8 +94,8 @@ public class TaskTrashAction extends TaskActionBase {
 
     leftPanel.add(new JScrollPane(list));
 
-    JButton removeall = new JButton("Remove All");
     JButton delete = new JButton("Delete");
+    JButton removeall = new JButton("Remove All");
     JButton restore = new JButton("Restore");
     JButton restoreall = new JButton("Restore All");
 
@@ -184,7 +157,6 @@ public class TaskTrashAction extends TaskActionBase {
     f.setLocationRelativeTo(null);
     f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     f.setVisible(true);
-
   }
 
   @Override
