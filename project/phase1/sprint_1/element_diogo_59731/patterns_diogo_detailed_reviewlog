@@ -1,0 +1,8 @@
+Pattern 1:
+    The description you provided matches the use for the UIFacade Interface. Also resembles the Facade pattern.
+    
+Review By Pedro
+
+Pattern 2:
+    As my collegue said the proxyDocument class is a lightweighted version of the interface, which is the definition of a proxy class.
+Review by Tiago

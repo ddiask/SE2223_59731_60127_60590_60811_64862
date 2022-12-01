@@ -1,0 +1,5 @@
+Pattern 1:
+    The location is not complete, need to be more specific to be easy to find the class.
+    I agree that this pattern is a facade. However, I think that it's not used to encapsulate
+    many other Task classes. In my point of view, this pattern is used to encapsulate Tasks in a tree.
+Review By Diogo

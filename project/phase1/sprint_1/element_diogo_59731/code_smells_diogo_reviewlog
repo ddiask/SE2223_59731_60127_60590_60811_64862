@@ -1,0 +1,9 @@
+Code Smell 1:
+    Indeed there's some repetition, the solution seems viable and easy to implement.
+    
+Review By Pedro
+
+Code Smell 2:
+    The line in question has 3 get calls so the solution of making the call inside the IGanttProject seems fine by hiding the complexity in other classes.
+    
+Review By Tiago
