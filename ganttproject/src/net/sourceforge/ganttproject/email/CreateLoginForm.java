@@ -68,6 +68,11 @@ public class CreateLoginForm extends JFrame implements ActionListener
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
                 uiFacade.getMainFrame().setEnabled(true);
             }
+
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                uiFacade.getMainFrame().setEnabled(true);
+            }
         });
 
         //set border to panel

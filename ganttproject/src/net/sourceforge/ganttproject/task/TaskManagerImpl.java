@@ -182,9 +182,7 @@ public class TaskManagerImpl implements TaskManager {
     }
 
     public Task[] getGarbageTasks() {
-
       Task[] a = myGarbageId2task.values().toArray(new Task[myGarbageId2task.size()]);
-
       isModified = false;
       return a;
     }
@@ -210,6 +208,7 @@ public class TaskManagerImpl implements TaskManager {
       Task[] nestedTasks = myManager.getTaskHierarchy().getNestedTasks(task);
       for (int i = 0; i < nestedTasks.length; i++) {
         removeTask(nestedTasks[i]);
+        addTaskToGarbage(nestedTasks[i]);
       }
       isModified = true;
     }
@@ -226,6 +225,7 @@ public class TaskManagerImpl implements TaskManager {
 
     public void restoreTask(Task task) {
       myGarbageId2task.remove(new Integer(task.getTaskID()));
+      myGarbageId2assignment.remove(new Integer(task.getTaskID()));
       isModified = true;
     }
 
@@ -486,49 +486,6 @@ public class TaskManagerImpl implements TaskManager {
     };
   }
 
-  public TaskBuilder newTaskBuilder(Task a) {
-    final Task task = a;
-    return new TaskBuilder() {
-      public Task build() {
-
-        Task aux = new GanttTask(TaskManagerImpl.this, (TaskImpl) task);
-
-        aux.setName(task.getName());
-        aux.setStart(task.getStart());
-        aux.setDuration(task.getDuration());
-        aux.setColor(task.getColor());
-        aux.setPriority(task.getPriority());
-        aux.setExpand(task.getExpand());
-        aux.setNotes(task.getNotes());
-        aux.setWebLink(task.getWebLink());
-        aux.setCompletionPercentage(task.getCompletionPercentage());
-        aux.getCost().setValue(task.getCost().getValue());
-        aux.setMilestone(task.isMilestone());
-
-        registerTask(task);
-
-        ResourceAssignment[] assignments = myTaskMap.myGarbageId2assignment.get(task.getTaskID());
-        for(int i = 0; i < assignments.length; i++) {
-          //System.out.println(assignments[i].getResource().getName());
-          aux.addHumanResource(assignments[i].getResource());
-        }
-
-        if (myPrevSibling != null && myPrevSibling != getRootTask()) {
-          int position = getTaskHierarchy().getTaskIndex(myPrevSibling) + 1;
-          Task parentTask = getTaskHierarchy().getContainer(myPrevSibling);
-          getTaskHierarchy().move(task, parentTask, position);
-        } else {
-          Task parentTask = myParent == null ? getRootTask() : myParent;
-          getTaskHierarchy().move(task, parentTask);
-        }
-
-        fireTaskAdded(task);
-        return task;
-
-      }
-    };
-  }
-
   protected TimeUnitStack getTimeUnitStack() {
     return getConfig().getTimeUnitStack();
   }
@@ -555,6 +512,19 @@ public class TaskManagerImpl implements TaskManager {
   }
 
   public void restoreTask(Task task) {
+    Task aux = taskRestore(task);
+    ResourceAssignment[] assignments = myTaskMap.myGarbageId2assignment.get(task.getTaskID());
+    for(int i = 0; i < assignments.length; i++) {
+      try {
+        aux.addHumanResource(assignments[i].getResource());
+      } catch(Exception e) {
+
+      }
+    }
+    myTaskMap.restoreTask(task);
+  }
+
+  private Task taskRestore(Task task) {
     Task aux = createTask(task.getTaskID());
 
     aux.setName(task.getName());
@@ -569,16 +539,14 @@ public class TaskManagerImpl implements TaskManager {
     aux.getCost().setValue(task.getCost().getValue());
     aux.setMilestone(task.isMilestone());
 
-    ResourceAssignment[] assignments = myTaskMap.myGarbageId2assignment.get(task.getTaskID());
-    for(int i = 0; i < assignments.length; i++) {
-      aux.addHumanResource(assignments[i].getResource());
-    }
-
-    myTaskMap.restoreTask(task);
+    return aux;
   }
 
   public void restoreAllTrash() {
-    myTaskMap.restoreTrash();
+    Task[] tasks = myTaskMap.myGarbageId2task.values().toArray(new Task[myTaskMap.myGarbageId2task.size()]);
+    for(int i = 0; i < tasks.length; i++) {
+      restoreTask(tasks[i]);
+    }
   }
 
   boolean isRegistered(TaskImpl task) {
