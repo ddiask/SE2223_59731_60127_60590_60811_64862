@@ -1,0 +1,5 @@
+Pattern 3:
+    The location is not complete, need to be more specific to be easy to find the class.
+    The class FactoryImpl is a Factory pattern. However, the description is general and
+    could be applied to every Factory that exists, I think you should be more specific.
+Review by Diogo Dias

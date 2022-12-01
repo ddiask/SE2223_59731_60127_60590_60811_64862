@@ -1,0 +1,6 @@
+code smell 2:
+    Although I can agree that only one comment that explains the whole Code is better than having
+    multiple comments scattered throughout the Code. In this case, there are only 4 lines of
+    comments that are fundamental to understanding what the method does. In this way, I cannot
+    agree that exist too many comments on this method.
+Review by Diogo

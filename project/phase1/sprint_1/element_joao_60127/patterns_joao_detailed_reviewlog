@@ -1,0 +1,4 @@
+Pattern 2:
+    The class ParserFactory is a Factory pattern. However, the description is general and
+    could be applied to every Factory that exists, I think you should be more specific.
+Review by Diogo Dias
