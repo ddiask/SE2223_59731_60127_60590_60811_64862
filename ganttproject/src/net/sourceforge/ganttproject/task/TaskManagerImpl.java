@@ -187,6 +187,12 @@ public class TaskManagerImpl implements TaskManager {
       return a;
     }
 
+    public ResourceAssignment[] getTaskResources(Task task) {
+      ResourceAssignment[] a = myGarbageId2assignment.get(task.getTaskID());
+      isModified = false;
+      return a;
+    }
+
     public void clear() {
       myGarbageId2task.putAll(myId2task);
       myId2task.clear();
@@ -512,8 +518,8 @@ public class TaskManagerImpl implements TaskManager {
   }
 
   public void restoreTask(Task task) {
-    Task aux = taskRestore(task);
-    ResourceAssignment[] assignments = myTaskMap.myGarbageId2assignment.get(task.getTaskID());
+    Task aux = restoredTaskBuilder(task);
+    ResourceAssignment[] assignments = myTaskMap.getTaskResources(task);
     for(int i = 0; i < assignments.length; i++) {
       try {
         aux.addHumanResource(assignments[i].getResource());
@@ -524,7 +530,7 @@ public class TaskManagerImpl implements TaskManager {
     myTaskMap.restoreTask(task);
   }
 
-  private Task taskRestore(Task task) {
+  private Task restoredTaskBuilder(Task task) {
     Task aux = createTask(task.getTaskID());
 
     aux.setName(task.getName());
@@ -543,7 +549,7 @@ public class TaskManagerImpl implements TaskManager {
   }
 
   public void restoreAllTrash() {
-    Task[] tasks = myTaskMap.myGarbageId2task.values().toArray(new Task[myTaskMap.myGarbageId2task.size()]);
+    Task[] tasks = myTaskMap.getGarbageTasks();
     for(int i = 0; i < tasks.length; i++) {
       restoreTask(tasks[i]);
     }
