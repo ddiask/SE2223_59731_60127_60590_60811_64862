@@ -1,3 +1,9 @@
 Review:
   -> I agree with my coleague, every action that can be made for task is well represented and explained properly, with every pre codition and post condition.
 Reviewed by Tiago Meirim 60811.
+
+Metrics Review:
+ - You should add a few examples of classes and their scores in those metrics. 
+ - While the the ExporterToCSV class contains the message chain code smell, it only has a CBO score of 9.0, 
+   which is a low value comparared to other classes in the project, so it might not be the best example.
+Reviewed by: Pedro Gasparinho, 60590
