@@ -34,3 +34,8 @@ Enail Use case Review
 --> The email functionality is well represented and with suficient explaning to understand what each method implements.
 
 Review by Tiago Meirim, 60811
+
+----------------------------------------------------------------------------------------------------------------------------
+Uploaded the updated files after my colleagues reviews.
+-Afonso Nunes 64862
+----------------------------------------------------------------------------------------------------------------------------
