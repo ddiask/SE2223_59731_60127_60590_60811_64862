@@ -6,3 +6,10 @@ I would only word it a little better so it's less
 confusing.
 
 Reviewed by: Afonso Nunes 64862
+
+
+Use Case Review
+
+The include arrow direction seems to be the wrong way.
+
+Reviewed by: Pedro Gasparinho 60590
