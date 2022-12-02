@@ -21,3 +21,7 @@ Trash Use Case Review
 I agree with the review made by my colleague Pedro Gasparinho.
 The rest seems fine.
 Reviewed by: Afonso Nunes 64862
+
+Transh Use Case Review
+I have nothing to add beyond what my colleagues said.
+Reviewed by:Diogo Dias 59731
