@@ -6,6 +6,11 @@ Email Use case Review
 
 Review by: Diogo Dias nº59731
 
+- The use cases and actors look correct to me.
+- The first phrase in the description sounds confusing, 
+  you used the words select and export, or variations, too many times.
+Review by: Pedro Gasparinho, 60590  
+
 Project Use Case
 
 --> I think you should specify in Use Case Diagram that System refers to Operating System where GanttProject is running.
