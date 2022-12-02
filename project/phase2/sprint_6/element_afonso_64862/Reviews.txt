@@ -1,0 +1,17 @@
+Email Use case Review
+
+-->The diagram has an orthographic error;
+-->In pre-condition to export as email, you should refer that you need a password provided by Google and the system needs to have resources with emails.
+--> In my opinion, you should specify how "Select Exporter" and "Insert the email properties" work. I understand that you do that in the export email, but you should separate the descriptions.
+
+Review by: Diogo Dias nº59731
+
+Project Use Case
+
+--> I think you should specify in Use Case Diagram that System refers to Operating System where GanttProject is running.
+--> You should merge the use cases "Save Project" and "Save Current Project" in one use case.
+--> You have some orthographic errors in your descriptions;
+-->I think you should refer to the pre-condition of "Import System" that you need to have a GanttProject saved on your computer.
+--> Edit project uses other features of GanttProject that are not specified in this use case. So you should add a GanttProject System to ensure these features.
+
+Review by: Diogo Dias nº59731
