@@ -4,3 +4,5 @@ Metrics
 --> The data analysis I think, is correct just need to adapt to new data.
 
 Review by: Diogo Dias, nº59731
+
+Seen by Tiago Meirim 60811 and corrected the errors
