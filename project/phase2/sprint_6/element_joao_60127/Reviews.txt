@@ -16,3 +16,8 @@ Reviewed by: Pedro Gasparinho 60590
 Trash Use Case Review
 The include arrow direction seems to be the wrong way.
 Reviewed by: Pedro Gasparinho 60590
+
+Trash Use Case Review
+I agree with the review made by my colleague Pedro Gasparinho.
+The rest seems fine.
+Reviewed by: Afonso Nunes 64862
