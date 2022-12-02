@@ -1,0 +1,8 @@
+Martin's Metrics 
+
+Firstly I think the data was rightly collected.
+Secondly I also think that the analysis was well done.
+I would only word it a little better so it's less
+confusing.
+
+Reviewed by: Afonso Nunes 64862
