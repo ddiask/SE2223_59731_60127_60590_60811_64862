@@ -8,8 +8,11 @@ confusing.
 Reviewed by: Afonso Nunes 64862
 
 
-Use Case Review
+Resource Use Case
+Agree with the diagram
+Reviewed by: Pedro Gasparinho 60590
 
+
+Trash Use Case Review
 The include arrow direction seems to be the wrong way.
-
 Reviewed by: Pedro Gasparinho 60590
