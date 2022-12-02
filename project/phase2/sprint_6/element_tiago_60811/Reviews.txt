@@ -6,3 +6,11 @@ Metrics
 Review by: Diogo Dias, nº59731
 
 Seen by Tiago Meirim 60811 and corrected the errors
+
+Calendar Use Case (V2)
+
+I agree with my college with the sctructure of the use case.
+The descriptions could be more extense.
+Nothing else to point out.
+
+Review by: João Ribeiro 60127
