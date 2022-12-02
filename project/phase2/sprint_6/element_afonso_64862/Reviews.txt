@@ -20,3 +20,10 @@ Project Use Case
 --> Edit project uses other features of GanttProject that are not specified in this use case. So you should add a GanttProject System to ensure these features.
 
 Review by: Diogo Dias nº59731
+
+Line_of_Code metrics Review
+
+--> There is indeed a no comment in CalendarActivityImpl where we can see the code smell and from the datagram we can conclude there is a lot of non commented features.
+--> The average lines of code per method which is about 9 tells us that there is a lot of not complicated methods, however like my coleague mentioned there is some methods that are extremely big with about 100 lines of code which makes the code really hard to follow.
+
+Review by: Tiago Meirim 60811
