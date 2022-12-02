@@ -35,6 +35,15 @@ Enail Use case Review
 
 Review by Tiago Meirim, 60811
 
+Email Use case Review
+
+I concur with the use case made by my colleague.
+The pre condition "Insert the e-mail properties" use case and the "Export as e-mail" use case are a bit confusing for some users withou privious knowledge.
+The desriptions are fine and the actors are correct
+
+Review by: Diogo Dias nº59731
+
+
 ----------------------------------------------------------------------------------------------------------------------------
 Uploaded the updated files after my colleagues reviews.
 -Afonso Nunes 64862
