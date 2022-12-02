@@ -1,0 +1,15 @@
+Task Hierarchy Use Case
+
+I agree with the diagram and description made by my colleague.
+He could however, make it more clear that the GanttSystem actor
+does not participate in operations like "Show Column", "Hide Column",
+"Resize Column", "Move Column", "Sort Column Entries" because they do not edit
+the task properties in itselt.
+
+Reviewed by: Afonso Nunes 64862
+
+View Use Case
+
+I agree with the diagram and description made by my colleague.
+
+Reviewed by: Afonso Nunes 64862
