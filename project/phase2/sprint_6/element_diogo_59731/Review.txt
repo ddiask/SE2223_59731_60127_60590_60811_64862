@@ -7,3 +7,6 @@ Metrics Review:
  - While the the ExporterToCSV class contains the message chain code smell, it only has a CBO score of 9.0, 
    which is a low value comparared to other classes in the project, so it might not be the best example.
 Reviewed by: Pedro Gasparinho, 60590
+
+Thank you, Pedro, I think that is correct now. 
+By: Diogo Dias
