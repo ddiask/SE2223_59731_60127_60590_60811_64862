@@ -158,6 +158,7 @@ public class GanttTree2 extends TreeTableContainer<Task, GanttTreeTable, GanttTr
     // Create Actions
     GPAction propertiesAction = new TaskPropertiesAction(project.getProject(), selectionManager, uiFacade);
     GPAction deleteAction = new TaskDeleteAction(taskManager, selectionManager, uiFacade, this);
+    // Added a line for the trash action
     GPAction trashAction = new TaskTrashAction(taskManager, selectionManager, uiFacade, this);
     GPAction newAction = new TaskNewAction(project.getProject(), uiFacade);
 
@@ -170,7 +171,7 @@ public class GanttTree2 extends TreeTableContainer<Task, GanttTreeTable, GanttTr
     myMoveDownAction = new TaskMoveDownAction(taskManager, selectionManager, uiFacade, this);
     getTreeTable().setupActionMaps(myMoveUpAction, myMoveDownAction, myIndentAction, myUnindentAction, newAction,
         myProject.getCutAction(), myProject.getCopyAction(), myProject.getPasteAction(), propertiesAction, deleteAction,
-            trashAction);
+            trashAction); // Adapted to inclued the trash action
   }
 
   @Override

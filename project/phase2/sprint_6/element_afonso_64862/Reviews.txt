@@ -1,0 +1,50 @@
+Email Use case Review
+
+-->The diagram has an orthographic error;
+-->In pre-condition to export as email, you should refer that you need a password provided by Google and the system needs to have resources with emails.
+--> In my opinion, you should specify how "Select Exporter" and "Insert the email properties" work. I understand that you do that in the export email, but you should separate the descriptions.
+
+Review by: Diogo Dias nº59731
+
+- The use cases and actors look correct to me.
+- The first phrase in the description sounds confusing, 
+  you used the words select and export, or variations, too many times.
+Review by: Pedro Gasparinho, 60590  
+
+Project Use Case
+
+--> I think you should specify in Use Case Diagram that System refers to Operating System where GanttProject is running.
+--> You should merge the use cases "Save Project" and "Save Current Project" in one use case.
+--> You have some orthographic errors in your descriptions;
+-->I think you should refer to the pre-condition of "Import System" that you need to have a GanttProject saved on your computer.
+--> Edit project uses other features of GanttProject that are not specified in this use case. So you should add a GanttProject System to ensure these features.
+
+Review by: Diogo Dias nº59731
+
+Line_of_Code metrics Review
+
+--> There is indeed a no comment in CalendarActivityImpl where we can see the code smell and from the datagram we can conclude there is a lot of non commented features.
+--> The average lines of code per method which is about 9 tells us that there is a lot of not complicated methods, however like my coleague mentioned there is some
+methods that are extremely big with about 100 lines of code which makes the code really hard to follow.
+
+Review by: Tiago Meirim, 60811
+
+Enail Use case Review
+
+--> The email functionality is well represented and with suficient explaning to understand what each method implements.
+
+Review by Tiago Meirim, 60811
+
+Email Use case Review
+
+I concur with the use case made by my colleague.
+The pre condition "Insert the e-mail properties" use case and the "Export as e-mail" use case are a bit confusing for some users withou privious knowledge.
+The desriptions are fine and the actors are correct
+
+Review by: Diogo Dias nº59731
+
+
+----------------------------------------------------------------------------------------------------------------------------
+Uploaded the updated files after my colleagues reviews.
+-Afonso Nunes 64862
+----------------------------------------------------------------------------------------------------------------------------

@@ -1,9 +1,11 @@
-GanttProject
-============
-[![Build Status] (https://travis-ci.org/bardsoftware/ganttproject.svg?branch=master)](https://travis-ci.org/bardsoftware/ganttproject)
+This project is being developed in the scope of the Software Engeneering 2022/23 Course at Nova SST.
 
-GanttProject is an open-source desktop project scheduling and management tool. It is written in Java/Swing.
+The team is formed by the following students:
+- Afonso Nunes, 64862 from P2
+- Diogo Dias, 59731 from P4
+- João Ribeiro, 60127, from P6
+- Pedro Gasparinho, 60590, from P2
+- Tiago Meirim, 60811, from P2
 
-This repository is a mirror of the [main Mercurial repository](https://code.google.com/p/ganttproject/source/browse/) on Google Code Hosting. It is almost always as actual as the main one (may be just a few commits behind). We synchronize repositories with [hg-git](http://hg-git.github.io/)
-
-Pull requests are welcome. Please read the [instructions on building the code](https://code.google.com/p/ganttproject/wiki/BuildingGanttProject).
+The changes we made are summarized in the following video:
+https://youtu.be/wOob7O8_zvY

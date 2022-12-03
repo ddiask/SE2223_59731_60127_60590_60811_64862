@@ -1,0 +1,174 @@
+------------------------------------------------------------------------ Email Use case Reviews -----------------------------------------------------------------------
+
+--> The diagram has an orthographic error;
+--> In pre-condition to export as email, you should refer that you need a password provided by Google and the system needs to have resources with emails.
+--> In my opinion, you should specify how "Select Exporter" and "Insert the email properties" work. I understand that you do that in the export email, 
+    but you should separate the descriptions.
+Review by: Diogo Dias nº59731
+
+- The use cases and actors look correct to me.
+- The first phrase in the description sounds confusing, 
+  you used the words select and export, or variations, too many times.
+Review by: Pedro Gasparinho, 60590  
+
+--> The email functionality is well represented and with suficient explaning to understand what each method implements.
+Review by Tiago Meirim, 60811
+
+I concur with the use case made by my colleague.
+The pre condition "Insert the e-mail properties" use case and the "Export as e-mail" use case are a bit confusing for some users withou privious knowledge.
+The desriptions are fine and the actors are correct
+Review by: Diogo Dias nº59731
+
+Uploaded the updated files after my colleagues reviews.
+-Afonso Nunes 64862
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------ Trash Use case Reviews -----------------------------------------------------------------------
+
+The include arrow direction seems to be the wrong way.
+Reviewed by: Pedro Gasparinho 60590
+
+I agree with the review made by my colleague Pedro Gasparinho.
+The rest seems fine.
+Reviewed by: Afonso Nunes 64862
+
+I have nothing to add beyond what my colleagues said.
+Reviewed by:Diogo Dias 59731
+
+Everything seems according to what we discussed so i have nothing to add.
+Reviewed by Tiago Meirim 60811
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------ Project Use Case Reviews ---------------------------------------------------------------------
+
+--> I think you should specify in Use Case Diagram that System refers to Operating System where GanttProject is running.
+--> You should merge the use cases "Save Project" and "Save Current Project" in one use case.
+--> You have some orthographic errors in your descriptions;
+-->I think you should refer to the pre-condition of "Import System" that you need to have a GanttProject saved on your computer.
+--> Edit project uses other features of GanttProject that are not specified in this use case. So you should add a GanttProject System to ensure these features.
+
+Review by: Diogo Dias nº59731
+
+Uploaded the updated files after my colleagues reviews.
+-Afonso Nunes 64862
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------- Tasks Use Case Reviews ----------------------------------------------------------------------
+
+  -> I agree with my coleague, every action that can be made for task is well represented and explained properly, with every pre codition and post condition.
+Reviewed by Tiago Meirim 60811.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------ Resource Use Case Reviews --------------------------------------------------------------------
+
+Agree with the diagram
+Reviewed by: Pedro Gasparinho 60590
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------- Task Hierarchy Use Case Reviews -----------------------------------------------------------------
+
+I agree with the diagram and description made by my colleague.
+He could however, make it more clear that the GanttSystem actor
+does not participate in operations like "Show Column", "Hide Column",
+"Resize Column", "Move Column", "Sort Column Entries" because they do not edit
+the task properties in itselt.
+
+Reviewed by: Afonso Nunes 64862
+
+Seen Both reviews. Added a note to clarify the task hierarchy use case. By: Pedro 
+Gasparinho 60590 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------- View Use Case Reviews ----------------------------------------------------------------------
+
+I agree with the diagram and description made by my colleague.
+Reviewed by: Afonso Nunes 64862
+
+Seen Both reviews. Added a note to clarify the task hierarchy use case. By: Pedro 
+Gasparinho 60590
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------- Calendar Use Case (V2) Reviews -----------------------------------------------------------------
+
+Calendar Use Case (V2)
+
+I agree with my college with the sctructure of the use case.
+The descriptions could be more extense.
+Nothing else to point out.
+
+Review by: João Ribeiro 60127
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------- Chidamber-Kemerer metrics Review ----------------------------------------------------------------
+
+ - You should add a few examples of classes and their scores in those metrics. 
+ - While the the ExporterToCSV class contains the message chain code smell, it only has a CBO score of 9.0, 
+   which is a low value comparared to other classes in the project, so it might not be the best example.
+Reviewed by: Pedro Gasparinho, 60590
+
+Thank you, Pedro, I think that is correct now. 
+By: Diogo Dias
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------ Line_of_Code metrics Review ------------------------------------------------------------------
+
+-> There is indeed a no comment in CalendarActivityImpl where we can see the code smell and from the datagram we can conclude there is a lot of non commented features.
+-> The average lines of code per method which is about 9 tells us that there is a lot of not complicated methods, however like my coleague mentioned there is some
+methods that are extremely big with about 100 lines of code which makes the code really hard to follow.
+Review by: Tiago Meirim, 60811
+
+Uploaded the updated files after my colleagues reviews.
+-Afonso Nunes 64862
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------- Martin's Packaging metrics Review ---------------------------------------------------------------
+
+Firstly I think the data was rightly collected.
+Secondly I also think that the analysis was well done.
+I would only word it a little better so it's less
+confusing.
+
+Reviewed by: Afonso Nunes 64862
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------- Complexity Metric Review --------------------------------------------------------------------
+
+The report made by my college is well explained and well presented.
+I agree with the description of the metrics and the graph that are presented.
+
+Reviewed by: João Ribeiro 60127
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------- Complexity Metrics Review -------------------------------------------------------------------
+
+--> I think you collect the wrong data. I confirm in my project and Pedro's project the data. If you want, I can give you what we think is correct.
+--> The data analysis I think, is correct just need to adapt to new data.
+Review by: Diogo Dias, nº59731
+
+Seen by Tiago Meirim 60811 and corrected the errors
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
