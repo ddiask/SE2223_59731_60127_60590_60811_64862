@@ -44,26 +44,46 @@ import net.sourceforge.ganttproject.task.ResourceAssignment;
 
 public class TaskTrashAction extends TaskActionBase {
 
+  /**
+   * The TaskTrashAction constructor
+   * @param taskManager object that handles what happens to the different tasks
+   * @param selectionManager gives the information about what task was selected
+   * @param uiFacade the object that handles what happens in the screen
+   * @param tree the object that handles the actions for tasks
+   */
   public TaskTrashAction(TaskManager taskManager, TaskSelectionManager selectionManager, UIFacade uiFacade,
                          GanttTree2 tree) {
     super("task.trash", taskManager, selectionManager, uiFacade, tree);
   }
 
+  /**
+   * The TaskTrashAction constructor with size
+   * @param taskManager object that handles what happens to the different tasks
+   * @param selectionManager gives the information about what task was selected
+   * @param uiFacade the object that handles what happens in the screen
+   * @param tree the object that handles the actions for tasks
+   * @param size the size of the icon
+   */
   private TaskTrashAction(TaskManager taskManager, TaskSelectionManager selectionManager, UIFacade uiFacade,
                           GanttTree2 tree, IconSize size) {
     super("task.trash", taskManager, selectionManager, uiFacade, tree, size);
   }
 
-  @Override
-  public GPAction withIcon(IconSize size) {
-    return new TaskTrashAction(getTaskManager(), getSelectionManager(), getUIFacade(), getTree(), size);
-  }
-
+  /**
+   * Shows if the task is enabled
+   * @param selection the list of tasks created
+   * @return true because u should always be able to access the trash
+   */
   @Override
   protected boolean isEnabled(List<Task> selection) {
     return true;
   }
 
+  /**
+   * The method that runs the trash action
+   * @param selection the list of tasks created
+   * @throws Exception
+   */
   @Override
   protected void run(List<Task> selection) throws Exception {
 
@@ -94,10 +114,13 @@ public class TaskTrashAction extends TaskActionBase {
     leftPanel.add(new JScrollPane(list));
 
     JButton delete = new JButton("Delete");
-    JButton removeall = new JButton("Remove All");
+    JButton deleteall = new JButton("Delete All");
     JButton restore = new JButton("Restore");
     JButton restoreall = new JButton("Restore All");
 
+    /**
+     * The action when the delete button is clicked
+     */
     delete.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {
         ListSelectionModel selmodel = list.getSelectionModel();
@@ -112,13 +135,19 @@ public class TaskTrashAction extends TaskActionBase {
       }
     });
 
-    removeall.addActionListener(new ActionListener() {
+    /**
+     * The action when the deleteall button is clicked
+     */
+    deleteall.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         getTaskManager().deleteTrashPermanently();
         data.clear();
       }
     });
 
+    /**
+     * The action when the restore button is clicked
+     */
     restore.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         ListSelectionModel selmodel = list.getSelectionModel();
@@ -133,6 +162,9 @@ public class TaskTrashAction extends TaskActionBase {
       }
     });
 
+    /**
+     * The action when the restoreall button is clicked
+     */
     restoreall.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         getTaskManager().restoreAllTrash();
@@ -141,7 +173,7 @@ public class TaskTrashAction extends TaskActionBase {
     });
 
     rightPanel.add(delete);
-    rightPanel.add(removeall);
+    rightPanel.add(deleteall);
     rightPanel.add(restore);
     rightPanel.add(restoreall);
 
@@ -161,6 +193,9 @@ public class TaskTrashAction extends TaskActionBase {
 
     getUIFacade().getMainFrame().setEnabled(false);
 
+    /**
+     * When something happens to the window this method is activated and listens to the action
+     */
     f.addWindowListener(new java.awt.event.WindowAdapter() {
       @Override
       public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -170,6 +205,10 @@ public class TaskTrashAction extends TaskActionBase {
 
   }
 
+  /**
+   * The method that transforms the action into a toolBarAction
+   * @return the new TaskTrashAction
+   */
   @Override
   public TaskTrashAction asToolbarAction() {
     TaskTrashAction result = new TaskTrashAction(getTaskManager(), getSelectionManager(), getUIFacade(), getTree());
