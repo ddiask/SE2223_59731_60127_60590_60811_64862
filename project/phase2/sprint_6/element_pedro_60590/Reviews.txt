@@ -14,6 +14,9 @@ I agree with the diagram and description made by my colleague.
 
 Reviewed by: Afonso Nunes 64862
 
+Seen Both reviews. Added a note to clarify the task hierarchy use case. By: Pedro 
+Gasparinho 60590 
+
 Complexity Metric
 
 The report made by my college is well explained and well presented.
