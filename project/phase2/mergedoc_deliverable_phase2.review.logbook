@@ -102,6 +102,19 @@ Gasparinho 60590
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+---------------------------------------------------------------------- Calendar Use Case (V2) Reviews -----------------------------------------------------------------
+
+Calendar Use Case (V2)
+
+I agree with my college with the sctructure of the use case.
+The descriptions could be more extense.
+Nothing else to point out.
+
+Review by: João Ribeiro 60127
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 --------------------------------------------------------------------- Chidamber-Kemerer metrics Review ----------------------------------------------------------------
 
  - You should add a few examples of classes and their scores in those metrics. 
@@ -149,3 +162,13 @@ Reviewed by: João Ribeiro 60127
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+------------------------------------------------------------------------- Complexity Metrics Review -------------------------------------------------------------------
+
+--> I think you collect the wrong data. I confirm in my project and Pedro's project the data. If you want, I can give you what we think is correct.
+--> The data analysis I think, is correct just need to adapt to new data.
+Review by: Diogo Dias, nº59731
+
+Seen by Tiago Meirim 60811 and corrected the errors
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
