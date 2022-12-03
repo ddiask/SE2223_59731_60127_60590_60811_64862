@@ -41,6 +41,28 @@ Uploaded the updated files after my colleagues reviews.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+------------------------------------------------------------------------- Tasks Use Case Reviews ----------------------------------------------------------------------
+
+Review:
+  -> I agree with my coleague, every action that can be made for task is well represented and explained properly, with every pre codition and post condition.
+Reviewed by Tiago Meirim 60811.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------- Chidamber-Kemerer metrics Review ----------------------------------------------------------------
+
+ - You should add a few examples of classes and their scores in those metrics. 
+ - While the the ExporterToCSV class contains the message chain code smell, it only has a CBO score of 9.0, 
+   which is a low value comparared to other classes in the project, so it might not be the best example.
+Reviewed by: Pedro Gasparinho, 60590
+
+Thank you, Pedro, I think that is correct now. 
+By: Diogo Dias
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 ------------------------------------------------------------------------ Line_of_Code metrics Review ------------------------------------------------------------------
 
 -> There is indeed a no comment in CalendarActivityImpl where we can see the code smell and from the datagram we can conclude there is a lot of non commented features.
@@ -50,7 +72,6 @@ Review by: Tiago Meirim, 60811
 
 Uploaded the updated files after my colleagues reviews.
 -Afonso Nunes 64862
-
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
