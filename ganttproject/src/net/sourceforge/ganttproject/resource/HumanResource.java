@@ -82,6 +82,18 @@ public class HumanResource implements CustomPropertyHolder {
     myCustomProperties = new CustomColumnsValues(myManager.getCustomPropertyManager());
   }
 
+  /**
+   * This constructor was created only to help the implementation of the email feature
+   * @param name Name of the resource
+   * @param id The id of the resource
+   */
+  public HumanResource(String name, int id){
+    this.id = id;
+    this.name = name;
+    myManager = null;
+    myCustomProperties=null;
+  }
+
   private HumanResource(HumanResource copy) {
     areEventsEnabled = false;
     setId(-1);
@@ -101,6 +113,8 @@ public class HumanResource implements CustomPropertyHolder {
     areEventsEnabled = true;
     myCustomProperties = (CustomColumnsValues) copy.myCustomProperties.clone();
   }
+
+
 
   /**
    * Removes the assignment objects associated to this ProjectResource and those
@@ -154,7 +168,8 @@ public class HumanResource implements CustomPropertyHolder {
       return;
     }
     this.email = email;
-    fireResourceChanged();
+    if(myManager!=null)
+      fireResourceChanged();
   }
 
   public String getMail() {

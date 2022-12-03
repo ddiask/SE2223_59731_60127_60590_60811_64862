@@ -65,10 +65,9 @@ public class SendEmail {
 
             } catch (Exception e){
                 return PROBLEM;
-            } //finally {
+            }
             t.setContextClassLoader(ccl);
             return SUCCESS;
-            //}
         } catch (MessagingException mex) {
             return PROBLEM;
             //mex.printStackTrace();

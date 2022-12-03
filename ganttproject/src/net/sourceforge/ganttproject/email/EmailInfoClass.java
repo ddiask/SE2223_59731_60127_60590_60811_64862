@@ -1,9 +1,10 @@
 package net.sourceforge.ganttproject.email;
-import java.util.*;
-import java.io.File;
-import java.net.*;
-import net.sourceforge.ganttproject.resource.*;
-import java.nio.file.Paths;
+
+import net.sourceforge.ganttproject.resource.HumanResource;
+
+import java.net.URI;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class EmailInfoClass implements EmailInfo{
@@ -20,13 +21,16 @@ public class EmailInfoClass implements EmailInfo{
         this.path=path;
     }
 
+
     public Iterator<HumanResource> resourceIterator(){
         return  recipients.iterator();
     }
 
+
     public URI getPath(){
         return path;
     }
+
 
     public void setUserSender(String userSender){
         this.userSender=userSender;

@@ -99,6 +99,10 @@ public class ExportFileWizardImpl extends WizardImpl {
     });
   }
 
+  /**
+   * On clicking on the email button this method is executed.
+   * This method exports the file and sends an email.
+   */
   @Override
   protected void onEmailPressed() {
     super.onEmailPressed();
@@ -110,23 +114,17 @@ public class ExportFileWizardImpl extends WizardImpl {
           if ("file".equals(myState.getUrl().getProtocol())) {
             myState.getExporter().run(new File(myState.getUrl().toURI()), finalizationJob);
           }
-          //    BrowserControl.displayURL("mailto:"+"teste@gmailcom"+"?"+"attach=file:///C:/Users/Afonso/Desktop/ESTESTES/testeemail123.pdf");
-          for (HumanResource collaborator:
-          myProject.getHumanResourceManager().getResources()) {
-            System.out.println(collaborator.getMail());
-          }
-          System.out.println(myState.getUrl().toURI());
           EmailInfo newMail= new EmailInfoClass(myProject.getHumanResourceManager().getResources(),
                   myState.getUrl().toURI());
           LoginFromDemo login = new LoginFromDemo();
           login.loginMail(newMail, getUIFacade());
-          System.out.println("Sou um email burro");
         } catch (Exception e) {
           GPLogger.log(e);
         }
       }
     });
   }
+
 
   private class ExportFinalizationJobImpl implements ExportFinalizationJob {
     @Override
