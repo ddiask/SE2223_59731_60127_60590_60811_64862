@@ -2,7 +2,7 @@ This project is being developed in the scope of the Software Engeneering 2022/23
 
 The team is formed by the following students:
 - Afonso Nunes, 64862 from P2
-- Diogo Dias, 59731 from P4
+- Diogo Dias, 59731 from P4, ID: ddiask
 - João Ribeiro, 60127, from P6
 - Pedro Gasparinho, 60590, from P2
 - Tiago Meirim, 60811, from P2
