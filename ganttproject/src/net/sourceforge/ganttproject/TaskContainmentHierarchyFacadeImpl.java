@@ -44,7 +44,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-class TaskContainmentHierarchyFacadeImpl implements TaskContainmentHierarchyFacade {
+public class TaskContainmentHierarchyFacadeImpl implements TaskContainmentHierarchyFacade {
   private Map<Task, MutableTreeTableNode> myTask2treeNode = new HashMap<Task, MutableTreeTableNode>();
   private Map<Task, Integer> myTask2index = new LinkedHashMap<Task, Integer>();
   private Task myRootTask;

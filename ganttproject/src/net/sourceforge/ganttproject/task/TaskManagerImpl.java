@@ -142,7 +142,7 @@ public class TaskManagerImpl implements TaskManager {
 
   private boolean areEventsEnabled = true;
 
-  private static class TaskMap {
+  public static class TaskMap {
     private final Map<Integer, Task> myId2task = new HashMap<Integer, Task>();
     private final Map<Integer, Task> myGarbageId2task = new HashMap<Integer, Task>();
     private final Map<Integer, ResourceAssignment[]> myGarbageId2assignment = new HashMap<Integer, ResourceAssignment[]>();
@@ -252,6 +252,7 @@ public class TaskManagerImpl implements TaskManager {
     void setDirty() {
       isModified = true;
     }
+
   }
 
   private final TaskMap myTaskMap = new TaskMap(this);
@@ -553,6 +554,10 @@ public class TaskManagerImpl implements TaskManager {
     for(int i = 0; i < tasks.length; i++) {
       restoreTask(tasks[i]);
     }
+  }
+
+  public TaskMap getTaskMap() {
+    return myTaskMap;
   }
 
   boolean isRegistered(TaskImpl task) {

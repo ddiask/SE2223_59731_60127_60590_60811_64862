@@ -253,4 +253,6 @@ public interface TaskManager {
 
   TaskManagerConfig getConfig();
 
+  TaskManagerImpl.TaskMap getTaskMap();
+
 }
